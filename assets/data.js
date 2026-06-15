@@ -45,6 +45,7 @@ const JOURS = [
     titre: "Arrivée & Blue Lagoon",
     region: "Péninsule de Reykjanes",
     trajet: { de: "Aéroport de Keflavík", a: "Borgarnes" },
+    geo: { de: "Keflavík Airport", a: "Borgarnes" },
     distanceKm: 170,
     nuit: "Borgarnes / région de Borgarfjörður",
     note: "Arrivée vers 15h, récupération de la voiture de location à l'aéroport.",
@@ -60,6 +61,7 @@ const JOURS = [
     titre: "Borgarfjörður",
     region: "Ouest",
     trajet: { de: "Borgarnes", a: "Borgarnes (boucle)" },
+    geo: { de: "Borgarnes", a: "Borgarnes" },
     distanceKm: 120,
     nuit: "Borgarnes / région de Borgarfjörður",
     activites: [
@@ -70,7 +72,7 @@ const JOURS = [
       { nom: "Reykholt", type: "histoire", maps: "Reykholt Iceland",
         desc: "Haut lieu historique, demeure du chroniqueur Snorri Sturluson." },
       { nom: "Rando de Glymur (option)", type: "rando", maps: "Glymur waterfall trail",
-        desc: "Une des plus hautes cascades d'Islande (~198 m). Boucle ~7 km, 3–4 h, traversée de rivière à gué — belle rando si le temps le permet." }
+        desc: "Une des plus hautes cascades d'Islande (~198 m). Boucle ~7 km, 3–4 h, traversée de rivière à gué — belle rando si le temps le permet. Accès en voiture normale (route 47, pas de piste F)." }
     ]
   },
   {
@@ -78,6 +80,7 @@ const JOURS = [
     titre: "Péninsule de Snæfellsnes",
     region: "Ouest",
     trajet: { de: "Borgarnes", a: "Grundarfjörður / Stykkishólmur" },
+    geo: { de: "Borgarnes", a: "Grundarfjörður" },
     distanceKm: 200,
     nuit: "Snæfellsnes (Grundarfjörður ou Stykkishólmur)",
     note: "« L'Islande en miniature » : glacier, volcans, falaises, villages de pêcheurs.",
@@ -99,6 +102,7 @@ const JOURS = [
     titre: "Nord-Ouest → Akureyri",
     region: "Nord",
     trajet: { de: "Snæfellsnes", a: "Akureyri" },
+    geo: { de: "Grundarfjörður", a: "Akureyri" },
     distanceKm: 290,
     nuit: "Akureyri",
     activites: [
@@ -117,6 +121,7 @@ const JOURS = [
     titre: "Akureyri → Lac Mývatn",
     region: "Nord",
     trajet: { de: "Akureyri", a: "Mývatn" },
+    geo: { de: "Akureyri", a: "Mývatn" },
     distanceKm: 110,
     nuit: "Mývatn / Reykjahlíð",
     activites: [
@@ -127,7 +132,7 @@ const JOURS = [
       { nom: "Dimmuborgir", type: "volcan", maps: "Dimmuborgir",
         desc: "Champ de lave aux formations spectaculaires, plusieurs sentiers de 0,6 à 2,2 km." },
       { nom: "Rando du cratère Hverfjall", type: "rando", maps: "Hverfjall crater",
-        desc: "Tour du rim d'un cratère volcanique (~3 km), vue panoramique sur le lac Mývatn." },
+        desc: "Tour du rim d'un cratère volcanique (~3 km), vue panoramique sur le lac Mývatn. Accès en voiture normale (route 860, pas de 4×4)." },
       { nom: "Mývatn Nature Baths", type: "bains", maps: "Myvatn Nature Baths",
         desc: "Les « bains bleus du Nord », moins fréquentés que le Blue Lagoon — détente en fin de journée." }
     ]
@@ -137,6 +142,7 @@ const JOURS = [
     titre: "Húsavík & Diamond Circle",
     region: "Nord",
     trajet: { de: "Mývatn", a: "Mývatn (via Húsavík)" },
+    geo: { de: "Mývatn", a: "Mývatn" },
     distanceKm: 220,
     nuit: "Mývatn / Húsavík",
     note: "Journée baleines au nord + grandes curiosités du Diamond Circle.",
@@ -156,6 +162,7 @@ const JOURS = [
     titre: "Est → Egilsstaðir",
     region: "Est",
     trajet: { de: "Mývatn", a: "Egilsstaðir" },
+    geo: { de: "Mývatn", a: "Egilsstaðir" },
     distanceKm: 230,
     nuit: "Egilsstaðir",
     activites: [
@@ -172,6 +179,7 @@ const JOURS = [
     titre: "Vallée de Fljótsdalur & randos",
     region: "Est",
     trajet: { de: "Egilsstaðir", a: "Egilsstaðir (boucle)" },
+    geo: { de: "Egilsstaðir", a: "Egilsstaðir" },
     distanceKm: 120,
     nuit: "Egilsstaðir",
     note: "Journée nature/rando autour d'Egilsstaðir.",
@@ -179,7 +187,7 @@ const JOURS = [
       { nom: "Rando de Hengifoss", type: "rando", maps: "Hengifoss trail",
         desc: "Montée (~5 km A/R, 2–3 h) vers une cascade de 128 m striée de couches rouges, en passant par Litlanesfoss et ses orgues basaltiques." },
       { nom: "Rando de Stórurð (option sportive)", type: "rando", maps: "Storurd hiking trail",
-        desc: "Blocs géants et lacs turquoise. ~12 km A/R, 5–6 h, niveau modéré — accessible seulement en été." },
+        desc: "Blocs géants et lacs turquoise. ~12 km A/R, 5–6 h, niveau modéré — accessible seulement en été. Départ depuis la route 94 (goudron/gravier), sans 4×4." },
       { nom: "Forêt de Hallormsstaður", type: "vue", maps: "Hallormsstadur forest",
         desc: "La plus grande forêt d'Islande, sentiers ombragés au bord du lac." }
     ]
@@ -189,6 +197,7 @@ const JOURS = [
     titre: "Fjords de l'Est → Höfn",
     region: "Sud-Est",
     trajet: { de: "Egilsstaðir", a: "Höfn" },
+    geo: { de: "Egilsstaðir", a: "Höfn" },
     distanceKm: 250,
     nuit: "Höfn",
     activites: [
@@ -207,6 +216,7 @@ const JOURS = [
     titre: "Glaciers — Vatnajökull",
     region: "Sud",
     trajet: { de: "Höfn", a: "Höfn / Skaftafell" },
+    geo: { de: "Höfn", a: "Jökulsárlón" },
     distanceKm: 160,
     nuit: "Höfn ou Skaftafell / Kirkjubæjarklaustur",
     note: "Première des deux journées « glaciers du sud ».",
@@ -224,6 +234,7 @@ const JOURS = [
     titre: "Skaftafell — randos & glacier",
     region: "Sud",
     trajet: { de: "Höfn / Skaftafell", a: "Vík / Kirkjubæjarklaustur" },
+    geo: { de: "Skaftafell", a: "Vík" },
     distanceKm: 180,
     nuit: "Vík ou Kirkjubæjarklaustur",
     note: "Deuxième journée glaciers : rando sur glace et sentiers de Skaftafell.",
@@ -241,6 +252,7 @@ const JOURS = [
     titre: "Côte sud",
     region: "Sud",
     trajet: { de: "Vík / Kirkjubæjarklaustur", a: "Vík / Hvolsvöllur" },
+    geo: { de: "Vík", a: "Hvolsvöllur" },
     distanceKm: 180,
     nuit: "Vík ou région de Hvolsvöllur (pour se rapprocher de Reykjavík)",
     activites: [
@@ -261,6 +273,7 @@ const JOURS = [
     titre: "Retour à Reykjavík",
     region: "Capitale",
     trajet: { de: "Vík / Hvolsvöllur", a: "Reykjavík" },
+    geo: { de: "Hvolsvöllur", a: "Reykjavík" },
     distanceKm: 190,
     nuit: "Reykjavík",
     note: "Fin du road trip : restitution de la voiture à Reykjavík. Après-midi/soirée pour visiter la capitale.",
@@ -278,6 +291,7 @@ const JOURS = [
     titre: "Cercle d'Or (excursion guidée)",
     region: "Sud-Ouest",
     trajet: { de: "Reykjavík", a: "Reykjavík (excursion)" },
+    geo: { de: "Reykjavík", a: "Reykjavík" },
     distanceKm: 0,
     nuit: "Reykjavík",
     note: "Voiture déjà rendue → excursion organisée à la journée depuis Reykjavík.",
@@ -295,6 +309,7 @@ const JOURS = [
     titre: "Départ",
     region: "Capitale → Aéroport",
     trajet: { de: "Reykjavík", a: "Aéroport de Keflavík" },
+    geo: { de: "Reykjavík", a: "Keflavík Airport" },
     distanceKm: 50,
     nuit: "—",
     note: "Voiture rendue : prévoir une navette (Flybus, ~45–50 min) ou un taxi vers l'aéroport.",
@@ -319,8 +334,17 @@ const ETAPES = JOURS.map((j, i) => ({
   region: j.region,
   distanceKm: j.distanceKm,
   nuit: j.nuit,
+  geoDe: j.geo.de,
+  geoA: j.geo.a,
   maps: j.trajet.a
 }));
+
+/* Grandes étapes (hubs) pour le lien « itinéraire complet » Google Maps.
+   Liste resserrée (≤ 10 points) pour rester dans la limite de Maps. */
+const ITINERAIRE_HUBS = [
+  "Keflavík Airport", "Borgarnes", "Grundarfjörður", "Akureyri", "Mývatn",
+  "Egilsstaðir", "Höfn", "Vík", "Reykjavík", "Keflavík Airport"
+];
 
 /* Total des kilomètres du road trip (jusqu'à la restitution de la voiture le 15/07). */
 const TOTAL_KM_ROADTRIP = JOURS

@@ -35,6 +35,11 @@ function monthShort(iso) { return MOIS[Number(iso.split("-")[1]) - 1]; }
 function mapsUrl(query) {
   return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(query);
 }
+/* Lien Google Maps « itinéraire » entre plusieurs points (départ → … → arrivée). */
+function mapsDir(...points) {
+  const segs = points.filter(Boolean).map(encodeURIComponent).join("/");
+  return "https://www.google.com/maps/dir/" + segs;
+}
 function eur(n) {
   return new Intl.NumberFormat("fr-FR", { style: "currency", currency: "EUR" }).format(n || 0);
 }
@@ -151,9 +156,14 @@ function initJours() {
     );
 
     const body = el("div", { class: "day-body" });
-    body.appendChild(el("div", { class: "route-line" },
+    const route = el("div", { class: "route-line" },
       `🚗 ${j.trajet.de} → ${j.trajet.a} `,
-      j.distanceKm ? el("span", { class: "km" }, `(~${j.distanceKm} km)`) : null));
+      j.distanceKm ? el("span", { class: "km" }, `(~${j.distanceKm} km)`) : null);
+    if (j.geo && j.geo.de !== j.geo.a) {
+      route.appendChild(el("a", { class: "maps-btn", href: mapsDir(j.geo.de, j.geo.a),
+        target: "_blank", rel: "noopener", style: "margin-left:.5rem" }, "🧭 Itinéraire"));
+    }
+    body.appendChild(route);
     if (j.note) body.appendChild(el("div", { class: "day-note" }, j.note));
     body.appendChild(el("div", { class: "sleep" }, "🛏️ Nuit : ", el("b", {}, j.nuit)));
 
@@ -185,6 +195,9 @@ function initJours() {
 function initItineraire() {
   const tb = $("#itin-body");
   ETAPES.forEach(s => {
+    const carte = (s.geoDe && s.geoA && s.geoDe !== s.geoA)
+      ? el("a", { class: "maps-btn", href: mapsDir(s.geoDe, s.geoA), target: "_blank", rel: "noopener" }, "🧭 Trajet")
+      : el("a", { class: "maps-btn", href: mapsUrl(s.geoA || s.maps), target: "_blank", rel: "noopener" }, "📍 Lieu");
     tb.appendChild(el("tr", {},
       el("td", {}, String(s.ordre)),
       el("td", {}, `${fmtDate(s.date)} (${s.jour})`),
@@ -192,10 +205,14 @@ function initItineraire() {
       el("td", {}, s.region),
       el("td", { class: "num" }, s.distanceKm ? `${s.distanceKm} km` : "—"),
       el("td", {}, s.nuit),
-      el("td", {}, el("a", { class: "maps-btn", href: mapsUrl(s.maps), target: "_blank", rel: "noopener" }, "📍"))
+      el("td", {}, carte)
     ));
   });
   $("#itin-total").textContent = `${TOTAL_KM_ROADTRIP.toLocaleString("fr-FR")} km`;
+
+  // Lien « itinéraire complet » (tous les hubs sur une seule carte)
+  const fr = $("#full-route");
+  if (fr) fr.href = mapsDir(...ITINERAIRE_HUBS);
 }
 
 /* ===========================================================

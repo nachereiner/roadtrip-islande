@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Itinéraire complet — Road Trip Islande</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🇮🇸</text></svg>">
+</head>
+<body data-page="itineraire">
+  <main>
+    <h1 class="page-title">🧭 Itinéraire complet</h1>
+    <p class="page-sub">Toutes les étapes du voyage, de bout en bout, dans l'ordre.</p>
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th><th>Date</th><th>Étape</th><th>Région</th>
+              <th class="num">Distance</th><th>Nuit</th><th>Carte</th>
+            </tr>
+          </thead>
+          <tbody id="itin-body"></tbody>
+          <tfoot>
+            <tr>
+              <td colspan="4">Total road trip (jusqu'à la restitution de la voiture, 15/07)</td>
+              <td class="num" id="itin-total">—</td>
+              <td colspan="2"></td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </div>
+    <p class="muted">Distances approximatives par jour. Le Cercle d'Or (16/07) se fait en excursion guidée, voiture déjà rendue.</p>
+  </main>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

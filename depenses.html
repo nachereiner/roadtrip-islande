@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dépenses — Road Trip Islande</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🇮🇸</text></svg>">
+</head>
+<body data-page="depenses">
+  <main>
+    <h1 class="page-title">💶 Dépenses</h1>
+    <p class="page-sub">Saisissez vos dépenses : tout est enregistré automatiquement dans ce navigateur. Total en euros.</p>
+
+    <div class="toolbar">
+      <button class="btn primary" id="dep-add">＋ Ajouter une dépense</button>
+      <span class="spacer"></span>
+      <button class="btn ghost" id="dep-export">⬇ Exporter (.json)</button>
+      <label class="btn ghost">⬆ Importer
+        <input type="file" id="dep-import" accept="application/json,.json" hidden>
+      </label>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:130px">Date</th><th style="width:150px">Catégorie</th><th>Libellé</th><th class="num" style="width:120px">Montant</th><th style="width:40px"></th></tr>
+          </thead>
+          <tbody id="dep-body"></tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="totaux" id="dep-totaux"></div>
+    <p class="muted">💡 Astuce : « Exporter » télécharge une sauvegarde .json (utile avant de changer d'appareil ou par sécurité). « Importer » recharge un fichier exporté.</p>
+  </main>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

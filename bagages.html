@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Bagages — Road Trip Islande</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🇮🇸</text></svg>">
+</head>
+<body data-page="bagages">
+  <main>
+    <h1 class="page-title">🎒 Checklist bagages</h1>
+    <p class="page-sub">Cochez au fur et à mesure de la valise. L'état est mémorisé sur cet appareil.</p>
+
+    <div class="toolbar">
+      <span class="status resa" id="bag-count">…</span>
+      <span class="spacer"></span>
+      <button class="btn ghost danger" id="bag-reset">↺ Tout décocher</button>
+    </div>
+    <div class="progress"><span id="bag-bar"></span></div>
+
+    <div id="bagages"></div>
+  </main>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

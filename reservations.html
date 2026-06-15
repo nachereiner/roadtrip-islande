@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Réservations — Road Trip Islande</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'><text y='14' font-size='14'>🇮🇸</text></svg>">
+</head>
+<body data-page="reservations">
+  <main>
+    <h1 class="page-title">📋 Suivi des réservations</h1>
+    <p class="page-sub">Hôtels, excursions, vol, transport. Modifiez le statut au fur et à mesure — tout est enregistré.</p>
+
+    <div class="toolbar">
+      <button class="btn primary" id="resa-add">＋ Ajouter une ligne</button>
+      <span class="status resa" id="resa-count">…</span>
+      <span class="spacer"></span>
+      <button class="btn ghost" id="resa-export">⬇ Exporter</button>
+      <label class="btn ghost">⬆ Importer
+        <input type="file" id="resa-import" accept="application/json,.json" hidden>
+      </label>
+      <button class="btn ghost danger" id="resa-reset">↺ Réinitialiser</button>
+    </div>
+
+    <div class="card">
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th style="width:110px">Type</th><th>Libellé</th><th style="width:140px">Date</th><th style="width:130px">N° confirmation</th><th style="width:130px">Statut</th><th style="width:40px"></th></tr>
+          </thead>
+          <tbody id="resa-body"></tbody>
+        </table>
+      </div>
+    </div>
+    <p class="muted">Statuts : <span class="status todo">à faire</span> <span class="status resa">réservé</span> <span class="status paye">payé</span></p>
+  </main>
+  <script src="assets/data.js"></script>
+  <script src="assets/app.js"></script>
+</body>
+</html>

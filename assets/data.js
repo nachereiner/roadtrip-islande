@@ -1,0 +1,403 @@
+/* =====================================================================
+   data.js — SOURCE UNIQUE DE DONNÉES du road trip Islande
+   Modifier ce fichier suffit à mettre à jour tout le site.
+   (index.html, jours.html, itineraire.html lisent tous JOURS / ETAPES)
+   ===================================================================== */
+
+const VOYAGE = {
+  titre: "Road Trip Islande",
+  sousTitre: "Tour de l'île — du 3 au 17 juillet 2026",
+  dateDebut: "2026-07-03",
+  dateFin: "2026-07-17",
+  devise: "EUR",
+  // Infos voiture (rappel pratique)
+  voiture: {
+    prise: "3 juillet — Aéroport de Keflavík (~15h)",
+    rendue: "15 juillet — Reykjavík (fin du road trip)"
+  }
+};
+
+/* Types d'activité → emoji + libellé (pastilles).
+   Utilisés tels quels dans JOURS via le champ "type". */
+const TYPES = {
+  bains:      { emoji: "♨️", label: "Bains" },
+  cascade:    { emoji: "💧", label: "Cascade" },
+  rando:      { emoji: "🥾", label: "Randonnée" },
+  glacier:    { emoji: "🧊", label: "Glacier" },
+  baleine:    { emoji: "🐋", label: "Baleines" },
+  volcan:     { emoji: "🌋", label: "Volcanique" },
+  village:    { emoji: "🏘️", label: "Village" },
+  vue:        { emoji: "📷", label: "Point de vue" },
+  faune:      { emoji: "🐦", label: "Faune" },
+  histoire:   { emoji: "🏛️", label: "Histoire" },
+  plage:      { emoji: "🏖️", label: "Plage" },
+  route:      { emoji: "🚗", label: "Route" },
+  ville:      { emoji: "🏙️", label: "Ville" }
+};
+
+/* ---------------------------------------------------------------------
+   JOURS — un objet par journée.
+   activites[].maps = requête envoyée à Google Maps (lien construit en JS).
+   --------------------------------------------------------------------- */
+const JOURS = [
+  {
+    date: "2026-07-03", jour: "Ven", etiquette: "Jour 1",
+    titre: "Arrivée & Blue Lagoon",
+    region: "Péninsule de Reykjanes",
+    trajet: { de: "Aéroport de Keflavík", a: "Borgarnes" },
+    distanceKm: 170,
+    nuit: "Borgarnes / région de Borgarfjörður",
+    note: "Arrivée vers 15h, récupération de la voiture de location à l'aéroport.",
+    activites: [
+      { nom: "Blue Lagoon", type: "bains", maps: "Blue Lagoon Iceland",
+        desc: "À 20 min de l'aéroport. Visite rapide en arrivant pour profiter du lieu (baignade optionnelle, à réserver à l'avance si on veut entrer)." },
+      { nom: "Route vers Borgarnes", type: "route", maps: "Borgarnes Iceland",
+        desc: "On contourne Reykjavík par le tunnel de Hvalfjörður pour rejoindre Borgarnes le soir et bien démarrer le tour de l'île dans le sens horaire." }
+    ]
+  },
+  {
+    date: "2026-07-04", jour: "Sam", etiquette: "Jour 2",
+    titre: "Borgarfjörður",
+    region: "Ouest",
+    trajet: { de: "Borgarnes", a: "Borgarnes (boucle)" },
+    distanceKm: 120,
+    nuit: "Borgarnes / région de Borgarfjörður",
+    activites: [
+      { nom: "Hraunfossar & Barnafoss", type: "cascade", maps: "Hraunfossar",
+        desc: "Cascades qui jaillissent d'un champ de lave sur des centaines de mètres, juste à côté des rapides de Barnafoss." },
+      { nom: "Deildartunguhver", type: "volcan", maps: "Deildartunguhver hot spring",
+        desc: "La source d'eau chaude la plus puissante d'Europe (180 L/s à 97°C)." },
+      { nom: "Reykholt", type: "histoire", maps: "Reykholt Iceland",
+        desc: "Haut lieu historique, demeure du chroniqueur Snorri Sturluson." },
+      { nom: "Rando de Glymur (option)", type: "rando", maps: "Glymur waterfall trail",
+        desc: "Une des plus hautes cascades d'Islande (~198 m). Boucle ~7 km, 3–4 h, traversée de rivière à gué — belle rando si le temps le permet." }
+    ]
+  },
+  {
+    date: "2026-07-05", jour: "Dim", etiquette: "Jour 3",
+    titre: "Péninsule de Snæfellsnes",
+    region: "Ouest",
+    trajet: { de: "Borgarnes", a: "Grundarfjörður / Stykkishólmur" },
+    distanceKm: 200,
+    nuit: "Snæfellsnes (Grundarfjörður ou Stykkishólmur)",
+    note: "« L'Islande en miniature » : glacier, volcans, falaises, villages de pêcheurs.",
+    activites: [
+      { nom: "Kirkjufell & Kirkjufellsfoss", type: "vue", maps: "Kirkjufell",
+        desc: "La montagne la plus photographiée d'Islande, avec sa cascade au premier plan." },
+      { nom: "Balade côtière Arnarstapi → Hellnar", type: "rando", maps: "Arnarstapi Hellnar coastal walk",
+        desc: "Sentier facile (~2,5 km aller) le long de falaises basaltiques et d'arches marines." },
+      { nom: "Djúpalónssandur", type: "plage", maps: "Djupalonssandur black beach",
+        desc: "Plage de galets noirs et vestiges d'un chalutier échoué." },
+      { nom: "Snæfellsjökull", type: "glacier", maps: "Snaefellsjokull",
+        desc: "Le volcan-glacier emblématique (le « Voyage au centre de la Terre » de Jules Verne)." },
+      { nom: "Église noire de Búðir", type: "village", maps: "Budir black church",
+        desc: "Petite église noire isolée dans un champ de lave, photogénique." }
+    ]
+  },
+  {
+    date: "2026-07-06", jour: "Lun", etiquette: "Jour 4",
+    titre: "Nord-Ouest → Akureyri",
+    region: "Nord",
+    trajet: { de: "Snæfellsnes", a: "Akureyri" },
+    distanceKm: 290,
+    nuit: "Akureyri",
+    activites: [
+      { nom: "Hvítserkur", type: "vue", maps: "Hvitserkur rock",
+        desc: "Rocher de 15 m en forme de dragon/éléphant qui boit dans la mer." },
+      { nom: "Phoques de Vatnsnes", type: "faune", maps: "Illugastadir seal watching Vatnsnes",
+        desc: "Péninsule réputée pour l'observation des phoques depuis la côte." },
+      { nom: "Ferme-musée de Glaumbær", type: "histoire", maps: "Glaumbaer turf farm",
+        desc: "Ferme traditionnelle en tourbe, plongée dans l'Islande d'autrefois." },
+      { nom: "Akureyri", type: "ville", maps: "Akureyri",
+        desc: "« Capitale du Nord », jolie ville au fond d'un fjord ; bonne base pour la suite." }
+    ]
+  },
+  {
+    date: "2026-07-07", jour: "Mar", etiquette: "Jour 5",
+    titre: "Akureyri → Lac Mývatn",
+    region: "Nord",
+    trajet: { de: "Akureyri", a: "Mývatn" },
+    distanceKm: 110,
+    nuit: "Mývatn / Reykjahlíð",
+    activites: [
+      { nom: "Goðafoss", type: "cascade", maps: "Godafoss",
+        desc: "« La cascade des dieux », large arc d'eau spectaculaire sur la route vers Mývatn." },
+      { nom: "Jardin botanique d'Akureyri", type: "ville", maps: "Akureyri botanical garden",
+        desc: "Un des jardins botaniques les plus septentrionaux au monde, à voir avant de partir." },
+      { nom: "Dimmuborgir", type: "volcan", maps: "Dimmuborgir",
+        desc: "Champ de lave aux formations spectaculaires, plusieurs sentiers de 0,6 à 2,2 km." },
+      { nom: "Rando du cratère Hverfjall", type: "rando", maps: "Hverfjall crater",
+        desc: "Tour du rim d'un cratère volcanique (~3 km), vue panoramique sur le lac Mývatn." },
+      { nom: "Mývatn Nature Baths", type: "bains", maps: "Myvatn Nature Baths",
+        desc: "Les « bains bleus du Nord », moins fréquentés que le Blue Lagoon — détente en fin de journée." }
+    ]
+  },
+  {
+    date: "2026-07-08", jour: "Mer", etiquette: "Jour 6",
+    titre: "Húsavík & Diamond Circle",
+    region: "Nord",
+    trajet: { de: "Mývatn", a: "Mývatn (via Húsavík)" },
+    distanceKm: 220,
+    nuit: "Mývatn / Húsavík",
+    note: "Journée baleines au nord + grandes curiosités du Diamond Circle.",
+    activites: [
+      { nom: "Baleines à Húsavík (North Sailing)", type: "baleine", maps: "North Sailing Husavik",
+        desc: "Capitale européenne de l'observation des baleines. Sortie ~3 h dans la baie de Skjálfandi (petits rorquals quasi garantis, parfois baleines à bosse/bleues, macareux). À réserver à l'avance en été." },
+      { nom: "Dettifoss", type: "cascade", maps: "Dettifoss",
+        desc: "La cascade la plus puissante d'Europe par le débit." },
+      { nom: "Ásbyrgi", type: "rando", maps: "Asbyrgi canyon",
+        desc: "Canyon en fer à cheval boisé, sentiers faciles vers l'étang et les falaises." },
+      { nom: "Námafjall / Hverir", type: "volcan", maps: "Hverir Namafjall",
+        desc: "Zone géothermale lunaire : solfatares, marmites de boue bouillonnantes, fumerolles." }
+    ]
+  },
+  {
+    date: "2026-07-09", jour: "Jeu", etiquette: "Jour 7",
+    titre: "Est → Egilsstaðir",
+    region: "Est",
+    trajet: { de: "Mývatn", a: "Egilsstaðir" },
+    distanceKm: 230,
+    nuit: "Egilsstaðir",
+    activites: [
+      { nom: "Désert de Möðrudalur", type: "route", maps: "Modrudalur",
+        desc: "Traversée des hauts plateaux désertiques de l'intérieur, paysages bruts." },
+      { nom: "Canyon de Stuðlagil", type: "vue", maps: "Studlagil canyon",
+        desc: "Spectaculaire canyon aux orgues basaltiques bordant une rivière glaciaire turquoise." },
+      { nom: "Egilsstaðir & lac Lagarfljót", type: "ville", maps: "Egilsstadir",
+        desc: "Principale ville de l'Est, au bord d'un long lac qui aurait son propre « monstre »." }
+    ]
+  },
+  {
+    date: "2026-07-10", jour: "Ven", etiquette: "Jour 8",
+    titre: "Vallée de Fljótsdalur & randos",
+    region: "Est",
+    trajet: { de: "Egilsstaðir", a: "Egilsstaðir (boucle)" },
+    distanceKm: 120,
+    nuit: "Egilsstaðir",
+    note: "Journée nature/rando autour d'Egilsstaðir.",
+    activites: [
+      { nom: "Rando de Hengifoss", type: "rando", maps: "Hengifoss trail",
+        desc: "Montée (~5 km A/R, 2–3 h) vers une cascade de 128 m striée de couches rouges, en passant par Litlanesfoss et ses orgues basaltiques." },
+      { nom: "Rando de Stórurð (option sportive)", type: "rando", maps: "Storurd hiking trail",
+        desc: "Blocs géants et lacs turquoise. ~12 km A/R, 5–6 h, niveau modéré — accessible seulement en été." },
+      { nom: "Forêt de Hallormsstaður", type: "vue", maps: "Hallormsstadur forest",
+        desc: "La plus grande forêt d'Islande, sentiers ombragés au bord du lac." }
+    ]
+  },
+  {
+    date: "2026-07-11", jour: "Sam", etiquette: "Jour 9",
+    titre: "Fjords de l'Est → Höfn",
+    region: "Sud-Est",
+    trajet: { de: "Egilsstaðir", a: "Höfn" },
+    distanceKm: 250,
+    nuit: "Höfn",
+    activites: [
+      { nom: "Seyðisfjörður", type: "village", maps: "Seydisfjordur",
+        desc: "Village d'artistes au fond d'un fjord, sa rue arc-en-ciel et son église bleue (détour depuis Egilsstaðir)." },
+      { nom: "Djúpivogur", type: "village", maps: "Djupivogur",
+        desc: "Paisible port de pêche, escale charmante sur la route des fjords." },
+      { nom: "Vestrahorn / Stokksnes", type: "vue", maps: "Stokksnes Vestrahorn",
+        desc: "Montagne dentelée se reflétant dans une plage de sable noir — l'un des plus beaux panoramas d'Islande." },
+      { nom: "Höfn", type: "ville", maps: "Hofn Iceland",
+        desc: "Port réputé pour la langoustine, aux portes du Vatnajökull." }
+    ]
+  },
+  {
+    date: "2026-07-12", jour: "Dim", etiquette: "Jour 10",
+    titre: "Glaciers — Vatnajökull",
+    region: "Sud",
+    trajet: { de: "Höfn", a: "Höfn / Skaftafell" },
+    distanceKm: 160,
+    nuit: "Höfn ou Skaftafell / Kirkjubæjarklaustur",
+    note: "Première des deux journées « glaciers du sud ».",
+    activites: [
+      { nom: "Lagune glaciaire de Jökulsárlón", type: "glacier", maps: "Jokulsarlon glacier lagoon",
+        desc: "Icebergs bleus dérivant sur un lac glaciaire. Croisière en bateau amphibie/zodiac possible (à réserver)." },
+      { nom: "Diamond Beach", type: "plage", maps: "Diamond Beach Iceland",
+        desc: "Blocs de glace échoués scintillant sur le sable noir, juste en face de la lagune." },
+      { nom: "Fjallsárlón", type: "glacier", maps: "Fjallsarlon",
+        desc: "Lagune glaciaire plus petite et plus intime, au pied du Vatnajökull." }
+    ]
+  },
+  {
+    date: "2026-07-13", jour: "Lun", etiquette: "Jour 11",
+    titre: "Skaftafell — randos & glacier",
+    region: "Sud",
+    trajet: { de: "Höfn / Skaftafell", a: "Vík / Kirkjubæjarklaustur" },
+    distanceKm: 180,
+    nuit: "Vík ou Kirkjubæjarklaustur",
+    note: "Deuxième journée glaciers : rando sur glace et sentiers de Skaftafell.",
+    activites: [
+      { nom: "Excursion rando sur glacier (Skaftafellsjökull)", type: "glacier", maps: "Skaftafell glacier hike tour",
+        desc: "Marche guidée avec crampons sur la langue glaciaire (~3 h, encadrée). À réserver — l'incontournable pour fouler un glacier en sécurité." },
+      { nom: "Rando de Svartifoss", type: "rando", maps: "Svartifoss trail Skaftafell",
+        desc: "Sentier le plus prisé de Skaftafell vers la cascade encadrée d'orgues basaltiques noires (~5,5 km A/R)." },
+      { nom: "Point de vue Sjónarnípa", type: "vue", maps: "Sjonarnipa viewpoint Skaftafell",
+        desc: "Prolongement de la rando pour surplomber la langue du Skaftafellsjökull." }
+    ]
+  },
+  {
+    date: "2026-07-14", jour: "Mar", etiquette: "Jour 12",
+    titre: "Côte sud",
+    region: "Sud",
+    trajet: { de: "Vík / Kirkjubæjarklaustur", a: "Vík / Hvolsvöllur" },
+    distanceKm: 180,
+    nuit: "Vík ou région de Hvolsvöllur (pour se rapprocher de Reykjavík)",
+    activites: [
+      { nom: "Fjaðrárgljúfur", type: "vue", maps: "Fjadrargljufur canyon",
+        desc: "Canyon sinueux et verdoyant aux parois vertigineuses, sentier le long du bord." },
+      { nom: "Reynisfjara", type: "plage", maps: "Reynisfjara black sand beach",
+        desc: "Célèbre plage de sable noir, orgues basaltiques et aiguilles de Reynisdrangar. ⚠️ Vagues sournoises, rester loin de l'eau." },
+      { nom: "Dyrhólaey", type: "vue", maps: "Dyrholaey",
+        desc: "Promontoire avec arche rocheuse, phare et macareux en été." },
+      { nom: "Skógafoss", type: "cascade", maps: "Skogafoss",
+        desc: "Cascade de 60 m que l'on peut approcher au plus près ; escalier vers le belvédère." },
+      { nom: "Seljalandsfoss & Gljúfrabúi", type: "cascade", maps: "Seljalandsfoss",
+        desc: "Cascade derrière laquelle on peut marcher, et sa voisine cachée dans une grotte." }
+    ]
+  },
+  {
+    date: "2026-07-15", jour: "Mer", etiquette: "Jour 13",
+    titre: "Retour à Reykjavík",
+    region: "Capitale",
+    trajet: { de: "Vík / Hvolsvöllur", a: "Reykjavík" },
+    distanceKm: 190,
+    nuit: "Reykjavík",
+    note: "Fin du road trip : restitution de la voiture à Reykjavík. Après-midi/soirée pour visiter la capitale.",
+    activites: [
+      { nom: "Hallgrímskirkja", type: "ville", maps: "Hallgrimskirkja",
+        desc: "L'église emblématique ; montée au clocher pour la vue sur la ville colorée." },
+      { nom: "Sun Voyager & front de mer", type: "ville", maps: "Sun Voyager Reykjavik",
+        desc: "Sculpture du « navire solaire » le long de la promenade, avec le Harpa à proximité." },
+      { nom: "Vieux port & centre", type: "ville", maps: "Reykjavik old harbour",
+        desc: "Rues commerçantes (Laugavegur), street art, cafés et restaurants." }
+    ]
+  },
+  {
+    date: "2026-07-16", jour: "Jeu", etiquette: "Jour 14",
+    titre: "Cercle d'Or (excursion guidée)",
+    region: "Sud-Ouest",
+    trajet: { de: "Reykjavík", a: "Reykjavík (excursion)" },
+    distanceKm: 0,
+    nuit: "Reykjavík",
+    note: "Voiture déjà rendue → excursion organisée à la journée depuis Reykjavík.",
+    activites: [
+      { nom: "Parc national de Þingvellir", type: "histoire", maps: "Thingvellir National Park",
+        desc: "Faille entre les plaques tectoniques et berceau du plus vieux parlement du monde (UNESCO)." },
+      { nom: "Geysir & Strokkur", type: "volcan", maps: "Geysir Strokkur",
+        desc: "Zone géothermale où Strokkur jaillit toutes les ~5–10 min." },
+      { nom: "Gullfoss", type: "cascade", maps: "Gullfoss",
+        desc: "« La chute d'or », double cascade majestueuse dans un canyon." }
+    ]
+  },
+  {
+    date: "2026-07-17", jour: "Ven", etiquette: "Jour 15",
+    titre: "Départ",
+    region: "Capitale → Aéroport",
+    trajet: { de: "Reykjavík", a: "Aéroport de Keflavík" },
+    distanceKm: 50,
+    nuit: "—",
+    note: "Voiture rendue : prévoir une navette (Flybus, ~45–50 min) ou un taxi vers l'aéroport.",
+    activites: [
+      { nom: "Navette vers Keflavík", type: "route", maps: "Flybus Reykjavik airport",
+        desc: "Réserver la navette aéroport à l'avance ; départ ~3 h avant le vol." }
+    ]
+  }
+];
+
+/* ---------------------------------------------------------------------
+   ETAPES — itinéraire à plat (vue séquentielle de bout en bout).
+   Généré depuis JOURS pour rester synchronisé (pas de saisie en double).
+   --------------------------------------------------------------------- */
+const ETAPES = JOURS.map((j, i) => ({
+  ordre: i + 1,
+  date: j.date,
+  jour: j.jour,
+  etiquette: j.etiquette,
+  de: j.trajet.de,
+  a: j.trajet.a,
+  region: j.region,
+  distanceKm: j.distanceKm,
+  nuit: j.nuit,
+  maps: j.trajet.a
+}));
+
+/* Total des kilomètres du road trip (jusqu'à la restitution de la voiture le 15/07). */
+const TOTAL_KM_ROADTRIP = JOURS
+  .filter(j => j.date <= "2026-07-15")
+  .reduce((s, j) => s + (j.distanceKm || 0), 0);
+
+/* ---------------------------------------------------------------------
+   BAGAGES — checklist par défaut (l'état coché est gardé en localStorage).
+   --------------------------------------------------------------------- */
+const BAGAGES_DEFAUT = [
+  { categorie: "Vêtements", items: [
+    "Veste imperméable et coupe-vent",
+    "Polaire / couche chaude",
+    "Sous-couches thermiques (le système 3 couches)",
+    "Pantalon de randonnée",
+    "Bonnet et gants (oui, même en juillet)",
+    "Chaussettes de randonnée (paires de rechange)"
+  ]},
+  { categorie: "Chaussures", items: [
+    "Chaussures de randonnée imperméables",
+    "Baskets / chaussures confort pour la voiture",
+    "Sandales (bains géothermaux)"
+  ]},
+  { categorie: "Bains géothermaux", items: [
+    "Maillot de bain",
+    "Serviette microfibre",
+    "Tongs"
+  ]},
+  { categorie: "Électronique", items: [
+    "Adaptateur prise européenne (type F)",
+    "Batterie externe",
+    "Chargeurs (téléphone, appareil photo)",
+    "Support téléphone voiture / GPS",
+    "Appareil photo"
+  ]},
+  { categorie: "Santé & divers", items: [
+    "Crème solaire & lunettes (jour quasi permanent)",
+    "Masque de sommeil (soleil de minuit)",
+    "Gourde réutilisable (eau du robinet excellente)",
+    "Trousse de premiers soins",
+    "Lessive de voyage"
+  ]},
+  { categorie: "Papiers & réservations", items: [
+    "Passeport / carte d'identité",
+    "Permis de conduire",
+    "Contrat de location voiture + assurances",
+    "Confirmations d'hôtels et d'excursions",
+    "Carte bancaire (paiement par carte partout)"
+  ]}
+];
+
+/* ---------------------------------------------------------------------
+   RESERVATIONS — liste de départ (modifiable, gardée en localStorage).
+   statut ∈ { "à faire", "réservé", "payé" }
+   --------------------------------------------------------------------- */
+const RESERVATIONS_DEFAUT = [
+  { type: "Vol", libelle: "Vol aller-retour", date: "2026-07-03", confirmation: "", statut: "à faire" },
+  { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "à faire" },
+  { type: "Activité", libelle: "Blue Lagoon (si baignade)", date: "2026-07-03", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Borgarnes / Borgarfjörður (2 nuits)", date: "2026-07-03", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Snæfellsnes (1 nuit)", date: "2026-07-05", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Akureyri (1 nuit)", date: "2026-07-06", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Mývatn / Húsavík (2 nuits)", date: "2026-07-07", confirmation: "", statut: "à faire" },
+  { type: "Activité", libelle: "Baleines Húsavík (North Sailing)", date: "2026-07-08", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Egilsstaðir (2 nuits)", date: "2026-07-09", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Höfn (1–2 nuits)", date: "2026-07-11", confirmation: "", statut: "à faire" },
+  { type: "Activité", libelle: "Croisière Jökulsárlón", date: "2026-07-12", confirmation: "", statut: "à faire" },
+  { type: "Activité", libelle: "Rando sur glacier Skaftafell", date: "2026-07-13", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Vík / Kirkjubæjarklaustur (1 nuit)", date: "2026-07-13", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Vík / Hvolsvöllur (1 nuit)", date: "2026-07-14", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Reykjavík (2 nuits)", date: "2026-07-15", confirmation: "", statut: "à faire" },
+  { type: "Activité", libelle: "Excursion Cercle d'Or", date: "2026-07-16", confirmation: "", statut: "à faire" },
+  { type: "Transport", libelle: "Navette aéroport (Flybus)", date: "2026-07-17", confirmation: "", statut: "à faire" }
+];
+
+/* Catégories suggérées pour la page Dépenses. */
+const CATEGORIES_DEPENSES = [
+  "Vol", "Voiture", "Carburant", "Hébergement", "Restaurant",
+  "Courses", "Activités", "Bains", "Souvenirs", "Autre"
+];

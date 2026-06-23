@@ -401,8 +401,8 @@ const BAGAGES_DEFAUT = [
    statut ∈ { "à faire", "réservé", "payé" }
    --------------------------------------------------------------------- */
 const RESERVATIONS_DEFAUT = [
-  { type: "Vol", libelle: "Vol aller-retour", date: "2026-07-03", confirmation: "", statut: "à faire" },
-  { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "à faire" },
+  { type: "Vol", libelle: "Vol aller-retour", date: "2026-07-03", confirmation: "", statut: "réservé" },
+  { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "réservé" },
   { type: "Activité", libelle: "Blue Lagoon (si baignade)", date: "2026-07-03", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Bjarg Borgarnes — guesthouse, 3 nuits (Bjarg, 310 Borgarnes)", date: "2026-07-03", confirmation: "", statut: "réservé" },
   { type: "Hôtel", libelle: "Hôtel Laugar — 3 nuits, 650 € (Laugar, région Húsavík)", date: "2026-07-06", confirmation: "", statut: "réservé" },

@@ -42,48 +42,29 @@ const TYPES = {
 const JOURS = [
   {
     date: "2026-07-03", jour: "Ven", etiquette: "Jour 1",
-    titre: "Arrivée & Blue Lagoon",
-    region: "Péninsule de Reykjanes",
+    titre: "Arrivée & Blue Lagoon → Borgarnes",
+    region: "Reykjanes → Ouest",
     trajet: { de: "Aéroport de Keflavík", a: "Borgarnes" },
     geo: { de: "Keflavík Airport", a: "Borgarnes" },
-    distanceKm: 170,
-    nuit: "Borgarnes / région de Borgarfjörður",
-    note: "Arrivée vers 15h, récupération de la voiture de location à l'aéroport.",
+    distanceKm: 150,
+    nuit: "Bjarg Borgarnes (nuit 1/3)",
+    note: "Arrivée vers 15h, récupération de la voiture à l'aéroport. Installation à la guesthouse Bjarg, base des 3 premières nuits.",
     activites: [
       { nom: "Blue Lagoon", type: "bains", maps: "Blue Lagoon Iceland",
         desc: "À 20 min de l'aéroport. Visite rapide en arrivant pour profiter du lieu (baignade optionnelle, à réserver à l'avance si on veut entrer)." },
-      { nom: "Route vers Borgarnes", type: "route", maps: "Borgarnes Iceland",
-        desc: "On contourne Reykjavík par le tunnel de Hvalfjörður pour rejoindre Borgarnes le soir et bien démarrer le tour de l'île dans le sens horaire." }
+      { nom: "Route vers Borgarnes (guesthouse Bjarg)", type: "route", maps: "Bjarg Borgarnes",
+        desc: "On contourne Reykjavík par le tunnel de Hvalfjörður pour rejoindre Borgarnes le soir. Guesthouse Bjarg (Bjarg, 310 Borgarnes), point de chute des 3 premières nuits." }
     ]
   },
   {
     date: "2026-07-04", jour: "Sam", etiquette: "Jour 2",
-    titre: "Borgarfjörður",
+    titre: "Snæfellsnes (en étoile depuis Borgarnes)",
     region: "Ouest",
-    trajet: { de: "Borgarnes", a: "Borgarnes (boucle)" },
-    geo: { de: "Borgarnes", a: "Borgarnes" },
-    distanceKm: 120,
-    nuit: "Borgarnes / région de Borgarfjörður",
-    activites: [
-      { nom: "Hraunfossar & Barnafoss", type: "cascade", maps: "Hraunfossar",
-        desc: "Cascades qui jaillissent d'un champ de lave sur des centaines de mètres, juste à côté des rapides de Barnafoss." },
-      { nom: "Deildartunguhver", type: "volcan", maps: "Deildartunguhver hot spring",
-        desc: "La source d'eau chaude la plus puissante d'Europe (180 L/s à 97°C)." },
-      { nom: "Reykholt", type: "histoire", maps: "Reykholt Iceland",
-        desc: "Haut lieu historique, demeure du chroniqueur Snorri Sturluson." },
-      { nom: "Rando de Glymur (option)", type: "rando", maps: "Glymur waterfall trail",
-        desc: "Une des plus hautes cascades d'Islande (~198 m). Boucle ~7 km, 3–4 h, traversée de rivière à gué — belle rando si le temps le permet. Accès en voiture normale (route 47, pas de piste F)." }
-    ]
-  },
-  {
-    date: "2026-07-05", jour: "Dim", etiquette: "Jour 3",
-    titre: "Péninsule de Snæfellsnes",
-    region: "Ouest",
-    trajet: { de: "Borgarnes", a: "Grundarfjörður / Stykkishólmur" },
+    trajet: { de: "Borgarnes", a: "Péninsule de Snæfellsnes (aller-retour)" },
     geo: { de: "Borgarnes", a: "Grundarfjörður" },
-    distanceKm: 200,
-    nuit: "Snæfellsnes (Grundarfjörður ou Stykkishólmur)",
-    note: "« L'Islande en miniature » : glacier, volcans, falaises, villages de pêcheurs.",
+    distanceKm: 290,
+    nuit: "Bjarg Borgarnes (nuit 2/3)",
+    note: "Journée en étoile sur la péninsule à l'ouest — « l'Islande en miniature ». Retour le soir à Borgarnes.",
     activites: [
       { nom: "Kirkjufell & Kirkjufellsfoss", type: "vue", maps: "Kirkjufell",
         desc: "La montagne la plus photographiée d'Islande, avec sa cascade au premier plan." },
@@ -98,73 +79,92 @@ const JOURS = [
     ]
   },
   {
-    date: "2026-07-06", jour: "Lun", etiquette: "Jour 4",
-    titre: "Nord-Ouest → Akureyri",
-    region: "Nord",
-    trajet: { de: "Snæfellsnes", a: "Akureyri" },
-    geo: { de: "Grundarfjörður", a: "Akureyri" },
-    distanceKm: 290,
-    nuit: "Akureyri",
+    date: "2026-07-05", jour: "Dim", etiquette: "Jour 3",
+    titre: "Borgarfjörður (en étoile depuis Borgarnes)",
+    region: "Ouest",
+    trajet: { de: "Borgarnes", a: "Borgarfjörður / terres à l'est (aller-retour)" },
+    geo: { de: "Borgarnes", a: "Hraunfossar" },
+    distanceKm: 130,
+    nuit: "Bjarg Borgarnes (nuit 3/3)",
+    note: "Les terres à l'est de Borgarnes : cascades, sources chaudes, histoire. Dernière nuit à Bjarg.",
     activites: [
-      { nom: "Hvítserkur", type: "vue", maps: "Hvitserkur rock",
-        desc: "Rocher de 15 m en forme de dragon/éléphant qui boit dans la mer." },
+      { nom: "Hraunfossar & Barnafoss", type: "cascade", maps: "Hraunfossar",
+        desc: "Cascades qui jaillissent d'un champ de lave sur des centaines de mètres, juste à côté des rapides de Barnafoss." },
+      { nom: "Deildartunguhver", type: "volcan", maps: "Deildartunguhver hot spring",
+        desc: "La source d'eau chaude la plus puissante d'Europe (180 L/s à 97°C)." },
+      { nom: "Reykholt", type: "histoire", maps: "Reykholt Iceland",
+        desc: "Haut lieu historique, demeure du chroniqueur Snorri Sturluson." },
+      { nom: "Rando de Glymur (option)", type: "rando", maps: "Glymur waterfall trail",
+        desc: "Une des plus hautes cascades d'Islande (~198 m). Boucle ~7 km, 3–4 h, traversée de rivière à gué — belle rando si le temps le permet. Accès en voiture normale (route 47, pas de piste F)." }
+    ]
+  },
+  {
+    date: "2026-07-06", jour: "Lun", etiquette: "Jour 4",
+    titre: "Transfert Borgarnes → Húsavík (Hôtel Laugar)",
+    region: "Ouest → Nord",
+    trajet: { de: "Borgarnes", a: "Hôtel Laugar (région Húsavík / Mývatn)" },
+    geo: { de: "Borgarnes", a: "Laugar 650 Iceland" },
+    distanceKm: 430,
+    nuit: "Hôtel Laugar (nuit 1/3)",
+    note: "Grande journée de route vers le nord, ponctuée d'arrêts. Installation à l'Hôtel Laugar pour 3 nuits (base idéale pour Mývatn et Húsavík).",
+    activites: [
+      { nom: "Hvítserkur (rocher éléphant / dragon)", type: "vue", maps: "Hvitserkur rock",
+        desc: "Rocher de 15 m en forme de dragon/éléphant qui boit dans la mer, sur la péninsule de Vatnsnes." },
       { nom: "Phoques de Vatnsnes", type: "faune", maps: "Illugastadir seal watching Vatnsnes",
         desc: "Péninsule réputée pour l'observation des phoques depuis la côte." },
-      { nom: "Ferme-musée de Glaumbær", type: "histoire", maps: "Glaumbaer turf farm",
-        desc: "Ferme traditionnelle en tourbe, plongée dans l'Islande d'autrefois." },
-      { nom: "Akureyri", type: "ville", maps: "Akureyri",
-        desc: "« Capitale du Nord », jolie ville au fond d'un fjord ; bonne base pour la suite." }
+      { nom: "Akureyri (arrêt)", type: "ville", maps: "Akureyri",
+        desc: "« Capitale du Nord », jolie ville au fond d'un fjord — pause déjeuner / balade avant de filer vers Laugar." },
+      { nom: "Goðafoss", type: "cascade", maps: "Godafoss",
+        desc: "« La cascade des dieux », large arc d'eau spectaculaire juste avant d'arriver à Laugar." }
     ]
   },
   {
     date: "2026-07-07", jour: "Mar", etiquette: "Jour 5",
-    titre: "Akureyri → Lac Mývatn",
+    titre: "Lac Mývatn (depuis Laugar)",
     region: "Nord",
-    trajet: { de: "Akureyri", a: "Mývatn" },
-    geo: { de: "Akureyri", a: "Mývatn" },
-    distanceKm: 110,
-    nuit: "Mývatn / Reykjahlíð",
+    trajet: { de: "Hôtel Laugar", a: "Lac Mývatn (aller-retour)" },
+    geo: { de: "Laugar 650 Iceland", a: "Mývatn" },
+    distanceKm: 150,
+    nuit: "Hôtel Laugar (nuit 2/3)",
+    note: "Journée autour du lac Mývatn, zone volcanique parmi les plus spectaculaires d'Islande.",
     activites: [
-      { nom: "Goðafoss", type: "cascade", maps: "Godafoss",
-        desc: "« La cascade des dieux », large arc d'eau spectaculaire sur la route vers Mývatn." },
-      { nom: "Jardin botanique d'Akureyri", type: "ville", maps: "Akureyri botanical garden",
-        desc: "Un des jardins botaniques les plus septentrionaux au monde, à voir avant de partir." },
       { nom: "Dimmuborgir", type: "volcan", maps: "Dimmuborgir",
         desc: "Champ de lave aux formations spectaculaires, plusieurs sentiers de 0,6 à 2,2 km." },
       { nom: "Rando du cratère Hverfjall", type: "rando", maps: "Hverfjall crater",
         desc: "Tour du rim d'un cratère volcanique (~3 km), vue panoramique sur le lac Mývatn. Accès en voiture normale (route 860, pas de 4×4)." },
+      { nom: "Námafjall / Hverir", type: "volcan", maps: "Hverir Namafjall",
+        desc: "Zone géothermale lunaire : solfatares, marmites de boue bouillonnantes, fumerolles." },
       { nom: "Mývatn Nature Baths", type: "bains", maps: "Myvatn Nature Baths",
         desc: "Les « bains bleus du Nord », moins fréquentés que le Blue Lagoon — détente en fin de journée." }
     ]
   },
   {
     date: "2026-07-08", jour: "Mer", etiquette: "Jour 6",
-    titre: "Húsavík & Diamond Circle",
+    titre: "Baleines à Húsavík & Diamond Circle",
     region: "Nord",
-    trajet: { de: "Mývatn", a: "Mývatn (via Húsavík)" },
-    geo: { de: "Mývatn", a: "Mývatn" },
-    distanceKm: 220,
-    nuit: "Mývatn / Húsavík",
-    note: "Journée baleines au nord + grandes curiosités du Diamond Circle.",
+    trajet: { de: "Hôtel Laugar", a: "Húsavík (aller-retour)" },
+    geo: { de: "Laugar 650 Iceland", a: "Húsavík" },
+    distanceKm: 250,
+    nuit: "Hôtel Laugar (nuit 3/3)",
+    note: "Le grand jour baleines au nord, complété par les curiosités du Diamond Circle.",
     activites: [
       { nom: "Baleines à Húsavík (North Sailing)", type: "baleine", maps: "North Sailing Husavik",
         desc: "Capitale européenne de l'observation des baleines. Sortie ~3 h dans la baie de Skjálfandi (petits rorquals quasi garantis, parfois baleines à bosse/bleues, macareux). À réserver à l'avance en été." },
       { nom: "Dettifoss", type: "cascade", maps: "Dettifoss",
         desc: "La cascade la plus puissante d'Europe par le débit." },
       { nom: "Ásbyrgi", type: "rando", maps: "Asbyrgi canyon",
-        desc: "Canyon en fer à cheval boisé, sentiers faciles vers l'étang et les falaises." },
-      { nom: "Námafjall / Hverir", type: "volcan", maps: "Hverir Namafjall",
-        desc: "Zone géothermale lunaire : solfatares, marmites de boue bouillonnantes, fumerolles." }
+        desc: "Canyon en fer à cheval boisé, sentiers faciles vers l'étang et les falaises." }
     ]
   },
   {
     date: "2026-07-09", jour: "Jeu", etiquette: "Jour 7",
-    titre: "Est → Egilsstaðir",
-    region: "Est",
-    trajet: { de: "Mývatn", a: "Egilsstaðir" },
-    geo: { de: "Mývatn", a: "Egilsstaðir" },
-    distanceKm: 230,
+    titre: "Húsavík / Laugar → Egilsstaðir",
+    region: "Nord → Est",
+    trajet: { de: "Hôtel Laugar", a: "Egilsstaðir" },
+    geo: { de: "Laugar 650 Iceland", a: "Egilsstaðir" },
+    distanceKm: 250,
     nuit: "Egilsstaðir",
+    note: "Reprise du tour de l'île vers l'est, via les hauts plateaux désertiques.",
     activites: [
       { nom: "Désert de Möðrudalur", type: "route", maps: "Modrudalur",
         desc: "Traversée des hauts plateaux désertiques de l'intérieur, paysages bruts." },
@@ -342,7 +342,7 @@ const ETAPES = JOURS.map((j, i) => ({
 /* Grandes étapes (hubs) pour le lien « itinéraire complet » Google Maps.
    Liste resserrée (≤ 10 points) pour rester dans la limite de Maps. */
 const ITINERAIRE_HUBS = [
-  "Keflavík Airport", "Borgarnes", "Grundarfjörður", "Akureyri", "Mývatn",
+  "Keflavík Airport", "Borgarnes", "Akureyri", "Mývatn",
   "Egilsstaðir", "Höfn", "Vík", "Reykjavík", "Keflavík Airport"
 ];
 
@@ -404,10 +404,8 @@ const RESERVATIONS_DEFAUT = [
   { type: "Vol", libelle: "Vol aller-retour", date: "2026-07-03", confirmation: "", statut: "à faire" },
   { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "à faire" },
   { type: "Activité", libelle: "Blue Lagoon (si baignade)", date: "2026-07-03", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Borgarnes / Borgarfjörður (2 nuits)", date: "2026-07-03", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Snæfellsnes (1 nuit)", date: "2026-07-05", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Akureyri (1 nuit)", date: "2026-07-06", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Mývatn / Húsavík (2 nuits)", date: "2026-07-07", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Bjarg Borgarnes — guesthouse, 3 nuits (Bjarg, 310 Borgarnes)", date: "2026-07-03", confirmation: "", statut: "réservé" },
+  { type: "Hôtel", libelle: "Hôtel Laugar — 3 nuits, 650 € (Laugar, région Húsavík)", date: "2026-07-06", confirmation: "", statut: "réservé" },
   { type: "Activité", libelle: "Baleines Húsavík (North Sailing)", date: "2026-07-08", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Egilsstaðir (2 nuits)", date: "2026-07-09", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Höfn (1–2 nuits)", date: "2026-07-11", confirmation: "", statut: "à faire" },

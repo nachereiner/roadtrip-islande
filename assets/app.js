@@ -219,7 +219,9 @@ function initItineraire() {
    PAGE : Dépenses
    =========================================================== */
 function initDepenses() {
-  let rows = store.get(KEYS.depenses, []);
+  // 1er chargement : on pré-remplit avec les dépenses déjà engagées (hébergements payés).
+  let rows = store.get(KEYS.depenses, null);
+  if (!rows) { rows = JSON.parse(JSON.stringify(DEPENSES_DEFAUT)); store.set(KEYS.depenses, rows); }
   const tbody = $("#dep-body");
 
   function persist() { store.set(KEYS.depenses, rows); }
@@ -280,6 +282,12 @@ function initDepenses() {
     if (Array.isArray(data)) { rows = data; persist(); render(); renderTotals(); }
     else alert("Fichier invalide : un tableau de dépenses était attendu.");
   }));
+  const reset = $("#dep-reset");
+  if (reset) reset.addEventListener("click", () => {
+    if (confirm("Recharger les dépenses pré-remplies (hébergements) ? Vos saisies seront perdues.")) {
+      rows = JSON.parse(JSON.stringify(DEPENSES_DEFAUT)); persist(); render(); renderTotals();
+    }
+  });
 
   render(); renderTotals();
 }

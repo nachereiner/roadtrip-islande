@@ -163,7 +163,7 @@ const JOURS = [
     trajet: { de: "Hôtel Laugar", a: "Egilsstaðir" },
     geo: { de: "Laugar 650 Iceland", a: "Egilsstaðir" },
     distanceKm: 250,
-    nuit: "Egilsstaðir",
+    nuit: "Hotel 1001 Nótt (Est) — réservé (nuit 1/2)",
     note: "Reprise du tour de l'île vers l'est, via les hauts plateaux désertiques.",
     activites: [
       { nom: "Désert de Möðrudalur", type: "route", maps: "Modrudalur",
@@ -181,7 +181,7 @@ const JOURS = [
     trajet: { de: "Egilsstaðir", a: "Egilsstaðir (boucle)" },
     geo: { de: "Egilsstaðir", a: "Egilsstaðir" },
     distanceKm: 120,
-    nuit: "Egilsstaðir",
+    nuit: "Hotel 1001 Nótt (Est) — réservé (nuit 2/2)",
     note: "Journée nature/rando autour d'Egilsstaðir.",
     activites: [
       { nom: "Rando de Hengifoss", type: "rando", maps: "Hengifoss trail",
@@ -199,7 +199,8 @@ const JOURS = [
     trajet: { de: "Egilsstaðir", a: "Höfn" },
     geo: { de: "Egilsstaðir", a: "Höfn" },
     distanceKm: 250,
-    nuit: "Höfn",
+    nuit: "Sefdalur (région Höfn) — réservé",
+    note: "Route des fjords de l'Est jusqu'à la région de Höfn, aux portes du Vatnajökull. Nuit à Sefdalur.",
     activites: [
       { nom: "Seyðisfjörður", type: "village", maps: "Seydisfjordur",
         desc: "Village d'artistes au fond d'un fjord, sa rue arc-en-ciel et son église bleue (détour depuis Egilsstaðir)." },
@@ -213,51 +214,36 @@ const JOURS = [
   },
   {
     date: "2026-07-12", jour: "Dim", etiquette: "Jour 10",
-    titre: "Glaciers — Vatnajökull",
+    titre: "Glaciers du Sud — Jökulsárlón & Skaftafell",
     region: "Sud",
-    trajet: { de: "Höfn", a: "Höfn / Skaftafell" },
-    geo: { de: "Höfn", a: "Jökulsárlón" },
-    distanceKm: 160,
-    nuit: "Höfn ou Skaftafell / Kirkjubæjarklaustur",
-    note: "Première des deux journées « glaciers du sud ».",
+    trajet: { de: "Höfn (Sefdalur)", a: "Kirkjubæjarklaustur" },
+    geo: { de: "Höfn", a: "Kirkjubæjarklaustur" },
+    distanceKm: 210,
+    nuit: "Adventure Hotel Geirland, Kirkjubæjarklaustur — réservé",
+    note: "LA journée glaciers du sud, d'est en ouest : lagunes le matin, excursion sur glacier l'après-midi. Partir tôt pour tout caser. Nuit à Geirland (Kirkjubæjarklaustur).",
     activites: [
       { nom: "Lagune glaciaire de Jökulsárlón", type: "glacier", maps: "Jokulsarlon glacier lagoon",
         desc: "Icebergs bleus dérivant sur un lac glaciaire. Croisière en bateau amphibie/zodiac possible (à réserver)." },
       { nom: "Diamond Beach", type: "plage", maps: "Diamond Beach Iceland",
         desc: "Blocs de glace échoués scintillant sur le sable noir, juste en face de la lagune." },
-      { nom: "Fjallsárlón", type: "glacier", maps: "Fjallsarlon",
-        desc: "Lagune glaciaire plus petite et plus intime, au pied du Vatnajökull." }
+      { nom: "Excursion rando sur glacier (Skaftafellsjökull)", type: "glacier", maps: "Skaftafell glacier hike tour",
+        desc: "Marche guidée avec crampons sur la langue glaciaire (~3 h, encadrée). À réserver — l'incontournable pour fouler un glacier en sécurité." },
+      { nom: "Rando de Svartifoss", type: "rando", maps: "Svartifoss trail Skaftafell",
+        desc: "Si le temps le permet : sentier vers la cascade encadrée d'orgues basaltiques noires (~5,5 km A/R)." }
     ]
   },
   {
     date: "2026-07-13", jour: "Lun", etiquette: "Jour 11",
-    titre: "Skaftafell — randos & glacier",
+    titre: "Côte sud → Hella",
     region: "Sud",
-    trajet: { de: "Höfn / Skaftafell", a: "Vík / Kirkjubæjarklaustur" },
-    geo: { de: "Skaftafell", a: "Vík" },
-    distanceKm: 180,
-    nuit: "Vík ou Kirkjubæjarklaustur",
-    note: "Deuxième journée glaciers : rando sur glace et sentiers de Skaftafell.",
-    activites: [
-      { nom: "Excursion rando sur glacier (Skaftafellsjökull)", type: "glacier", maps: "Skaftafell glacier hike tour",
-        desc: "Marche guidée avec crampons sur la langue glaciaire (~3 h, encadrée). À réserver — l'incontournable pour fouler un glacier en sécurité." },
-      { nom: "Rando de Svartifoss", type: "rando", maps: "Svartifoss trail Skaftafell",
-        desc: "Sentier le plus prisé de Skaftafell vers la cascade encadrée d'orgues basaltiques noires (~5,5 km A/R)." },
-      { nom: "Point de vue Sjónarnípa", type: "vue", maps: "Sjonarnipa viewpoint Skaftafell",
-        desc: "Prolongement de la rando pour surplomber la langue du Skaftafellsjökull." }
-    ]
-  },
-  {
-    date: "2026-07-14", jour: "Mar", etiquette: "Jour 12",
-    titre: "Côte sud",
-    region: "Sud",
-    trajet: { de: "Vík / Kirkjubæjarklaustur", a: "Vík / Hvolsvöllur" },
-    geo: { de: "Vík", a: "Hvolsvöllur" },
-    distanceKm: 180,
-    nuit: "Vík ou région de Hvolsvöllur (pour se rapprocher de Reykjavík)",
+    trajet: { de: "Kirkjubæjarklaustur", a: "Hella" },
+    geo: { de: "Kirkjubæjarklaustur", a: "Hella" },
+    distanceKm: 190,
+    nuit: "Riverfront Lodge Hella — réservé (nuit 1/2)",
+    note: "Les incontournables de la côte sud d'est en ouest, jusqu'à la base de Hella pour 2 nuits.",
     activites: [
       { nom: "Fjaðrárgljúfur", type: "vue", maps: "Fjadrargljufur canyon",
-        desc: "Canyon sinueux et verdoyant aux parois vertigineuses, sentier le long du bord." },
+        desc: "Canyon sinueux et verdoyant aux parois vertigineuses, sentier le long du bord (juste à côté de Kirkjubæjarklaustur)." },
       { nom: "Reynisfjara", type: "plage", maps: "Reynisfjara black sand beach",
         desc: "Célèbre plage de sable noir, orgues basaltiques et aiguilles de Reynisdrangar. ⚠️ Vagues sournoises, rester loin de l'eau." },
       { nom: "Dyrhólaey", type: "vue", maps: "Dyrholaey",
@@ -269,12 +255,32 @@ const JOURS = [
     ]
   },
   {
+    date: "2026-07-14", jour: "Mar", etiquette: "Jour 12",
+    titre: "Journée libre (base Hella)",
+    region: "Sud",
+    trajet: { de: "Hella", a: "Hella (au choix)" },
+    geo: { de: "Hella", a: "Hella" },
+    distanceKm: 100,
+    nuit: "Riverfront Lodge Hella — réservé (nuit 2/2)",
+    note: "Journée souple depuis Hella : au choix selon la météo et l'envie. Sert aussi de tampon si une visite a été reportée.",
+    activites: [
+      { nom: "Îles Westman (Vestmannaeyjar)", type: "faune", maps: "Landeyjahofn ferry Vestmannaeyjar",
+        desc: "Ferry depuis Landeyjahöfn (~30 min de Hella, traversée ~35 min) : macareux, volcan Eldfell, falaises. Une belle excursion à la journée." },
+      { nom: "Vallée de Þórsmörk (point de vue)", type: "rando", maps: "Thorsmork",
+        desc: "Vallée glaciaire splendide — accès uniquement en bus 4×4 organisé (gués de rivière, route F interdite en voiture normale)." },
+      { nom: "Seljavallalaug", type: "bains", maps: "Seljavallalaug pool",
+        desc: "Piscine géothermale nichée dans la montagne, ~20 min de marche — ambiance hors du temps." },
+      { nom: "Repos / météo", type: "route", maps: "Hella Iceland",
+        desc: "Ou simplement souffler avant la dernière ligne droite, ou rattraper une visite reportée de la côte sud." }
+    ]
+  },
+  {
     date: "2026-07-15", jour: "Mer", etiquette: "Jour 13",
     titre: "Retour à Reykjavík",
     region: "Capitale",
-    trajet: { de: "Vík / Hvolsvöllur", a: "Reykjavík" },
-    geo: { de: "Hvolsvöllur", a: "Reykjavík" },
-    distanceKm: 190,
+    trajet: { de: "Hella", a: "Reykjavík" },
+    geo: { de: "Hella", a: "Reykjavík" },
+    distanceKm: 95,
     nuit: "Reykjavík",
     note: "Fin du road trip : restitution de la voiture à Reykjavík. Après-midi/soirée pour visiter la capitale.",
     activites: [
@@ -405,14 +411,14 @@ const RESERVATIONS_DEFAUT = [
   { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "réservé" },
   { type: "Activité", libelle: "Blue Lagoon (si baignade)", date: "2026-07-03", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Bjarg Borgarnes — guesthouse, 3 nuits (Bjarg, 310 Borgarnes)", date: "2026-07-03", confirmation: "", statut: "réservé" },
-  { type: "Hôtel", libelle: "Hôtel Laugar — 3 nuits, 650 € (Laugar, région Húsavík)", date: "2026-07-06", confirmation: "", statut: "réservé" },
+  { type: "Hôtel", libelle: "Hótel Laugar — 3 nuits, 655,65 € (région Húsavík)", date: "2026-07-06", confirmation: "", statut: "payé" },
   { type: "Activité", libelle: "Baleines Húsavík (North Sailing)", date: "2026-07-08", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Egilsstaðir (2 nuits)", date: "2026-07-09", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Höfn (1–2 nuits)", date: "2026-07-11", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Hotel 1001 Nótt — 2 nuits, 575 € (Est)", date: "2026-07-09", confirmation: "", statut: "payé" },
+  { type: "Hôtel", libelle: "Sefdalur — 1 nuit, 214,20 € (région Höfn)", date: "2026-07-11", confirmation: "", statut: "payé" },
   { type: "Activité", libelle: "Croisière Jökulsárlón", date: "2026-07-12", confirmation: "", statut: "à faire" },
-  { type: "Activité", libelle: "Rando sur glacier Skaftafell", date: "2026-07-13", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Vík / Kirkjubæjarklaustur (1 nuit)", date: "2026-07-13", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Vík / Hvolsvöllur (1 nuit)", date: "2026-07-14", confirmation: "", statut: "à faire" },
+  { type: "Activité", libelle: "Rando sur glacier Skaftafell", date: "2026-07-12", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Adventure Hotel Geirland — 1 nuit, 295,10 € (Kirkjubæjarklaustur)", date: "2026-07-12", confirmation: "", statut: "payé" },
+  { type: "Hôtel", libelle: "Riverfront Lodge Hella — 2 nuits, 450,50 €", date: "2026-07-13", confirmation: "", statut: "payé" },
   { type: "Hôtel", libelle: "Reykjavík (2 nuits)", date: "2026-07-15", confirmation: "", statut: "à faire" },
   { type: "Activité", libelle: "Excursion Cercle d'Or", date: "2026-07-16", confirmation: "", statut: "à faire" },
   { type: "Transport", libelle: "Navette aéroport (Flybus)", date: "2026-07-17", confirmation: "", statut: "à faire" }
@@ -422,4 +428,16 @@ const RESERVATIONS_DEFAUT = [
 const CATEGORIES_DEPENSES = [
   "Vol", "Voiture", "Carburant", "Hébergement", "Restaurant",
   "Courses", "Activités", "Bains", "Souvenirs", "Autre"
+];
+
+/* ---------------------------------------------------------------------
+   DEPENSES — dépenses déjà engagées (pré-remplies au 1er chargement).
+   Les hébergements confirmés/payés. À compléter dans la page Dépenses.
+   --------------------------------------------------------------------- */
+const DEPENSES_DEFAUT = [
+  { date: "2026-07-06", categorie: "Hébergement", libelle: "Hótel Laugar (3 nuits)", montant: 655.65 },
+  { date: "2026-07-09", categorie: "Hébergement", libelle: "Hotel 1001 Nótt (2 nuits)", montant: 575 },
+  { date: "2026-07-11", categorie: "Hébergement", libelle: "Sefdalur (1 nuit)", montant: 214.20 },
+  { date: "2026-07-12", categorie: "Hébergement", libelle: "Adventure Hotel Geirland (1 nuit)", montant: 295.10 },
+  { date: "2026-07-13", categorie: "Hébergement", libelle: "Riverfront Lodge Hella (2 nuits)", montant: 450.50 }
 ];

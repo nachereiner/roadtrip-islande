@@ -45,7 +45,7 @@ const JOURS = [
     titre: "Arrivée & Blue Lagoon → Borgarnes",
     region: "Reykjanes → Ouest",
     trajet: { de: "Aéroport de Keflavík", a: "Borgarnes" },
-    geo: { de: "Keflavík Airport", a: "Borgarnes" },
+    geo: { de: "Keflavík Airport", a: "Bjarg Borgarnes" },
     distanceKm: 150,
     nuit: "Bjarg Borgarnes (nuit 1/3)",
     note: "Arrivée vers 15h, récupération de la voiture à l'aéroport. Installation à la guesthouse Bjarg, base des 3 premières nuits.",
@@ -61,7 +61,7 @@ const JOURS = [
     titre: "Snæfellsnes (en étoile depuis Borgarnes)",
     region: "Ouest",
     trajet: { de: "Borgarnes", a: "Péninsule de Snæfellsnes (aller-retour)" },
-    geo: { de: "Borgarnes", a: "Grundarfjörður" },
+    geo: { de: "Bjarg Borgarnes", a: "Grundarfjörður" },
     distanceKm: 290,
     nuit: "Bjarg Borgarnes (nuit 2/3)",
     note: "Journée en étoile sur la péninsule à l'ouest — « l'Islande en miniature ». Retour le soir à Borgarnes.",
@@ -83,7 +83,7 @@ const JOURS = [
     titre: "Borgarfjörður (en étoile depuis Borgarnes)",
     region: "Ouest",
     trajet: { de: "Borgarnes", a: "Borgarfjörður / terres à l'est (aller-retour)" },
-    geo: { de: "Borgarnes", a: "Hraunfossar" },
+    geo: { de: "Bjarg Borgarnes", a: "Hraunfossar" },
     distanceKm: 130,
     nuit: "Bjarg Borgarnes (nuit 3/3)",
     note: "Les terres à l'est de Borgarnes : cascades, sources chaudes, histoire. Dernière nuit à Bjarg.",
@@ -103,7 +103,7 @@ const JOURS = [
     titre: "Transfert Borgarnes → Húsavík (Hôtel Laugar)",
     region: "Ouest → Nord",
     trajet: { de: "Borgarnes", a: "Hôtel Laugar (région Húsavík / Mývatn)" },
-    geo: { de: "Borgarnes", a: "Laugar 650 Iceland" },
+    geo: { de: "Bjarg Borgarnes", a: "Hótel Laugar Reykjadalur" },
     distanceKm: 430,
     nuit: "Hôtel Laugar (nuit 1/3)",
     note: "Grande journée de route vers le nord, ponctuée d'arrêts. Installation à l'Hôtel Laugar pour 3 nuits (base idéale pour Mývatn et Húsavík).",
@@ -123,7 +123,7 @@ const JOURS = [
     titre: "Lac Mývatn (depuis Laugar)",
     region: "Nord",
     trajet: { de: "Hôtel Laugar", a: "Lac Mývatn (aller-retour)" },
-    geo: { de: "Laugar 650 Iceland", a: "Mývatn" },
+    geo: { de: "Hótel Laugar Reykjadalur", a: "Mývatn" },
     distanceKm: 150,
     nuit: "Hôtel Laugar (nuit 2/3)",
     note: "Journée autour du lac Mývatn, zone volcanique parmi les plus spectaculaires d'Islande.",
@@ -143,7 +143,7 @@ const JOURS = [
     titre: "Baleines à Húsavík & Diamond Circle",
     region: "Nord",
     trajet: { de: "Hôtel Laugar", a: "Húsavík (aller-retour)" },
-    geo: { de: "Laugar 650 Iceland", a: "Húsavík" },
+    geo: { de: "Hótel Laugar Reykjadalur", a: "Húsavík" },
     distanceKm: 250,
     nuit: "Hôtel Laugar (nuit 3/3)",
     note: "Le grand jour baleines au nord, complété par les curiosités du Diamond Circle.",
@@ -161,7 +161,7 @@ const JOURS = [
     titre: "Húsavík / Laugar → Egilsstaðir",
     region: "Nord → Est",
     trajet: { de: "Hôtel Laugar", a: "Egilsstaðir" },
-    geo: { de: "Laugar 650 Iceland", a: "Egilsstaðir" },
+    geo: { de: "Hótel Laugar Reykjadalur", a: "Hótel 1001 Nótt Egilsstaðir" },
     distanceKm: 250,
     nuit: "Hotel 1001 Nótt, Egilsstaðir — réservé (nuit 1/2)",
     note: "Reprise du tour de l'île vers l'est, via les hauts plateaux désertiques.",
@@ -179,7 +179,7 @@ const JOURS = [
     titre: "Vallée de Fljótsdalur & randos",
     region: "Est",
     trajet: { de: "Egilsstaðir", a: "Egilsstaðir (boucle)" },
-    geo: { de: "Egilsstaðir", a: "Egilsstaðir" },
+    geo: { de: "Hótel 1001 Nótt Egilsstaðir", a: "Hengifoss" },
     distanceKm: 120,
     nuit: "Hotel 1001 Nótt, Egilsstaðir — réservé (nuit 2/2)",
     note: "Journée nature/rando autour d'Egilsstaðir.",
@@ -197,7 +197,7 @@ const JOURS = [
     titre: "Fjords de l'Est → Höfn",
     region: "Sud-Est",
     trajet: { de: "Egilsstaðir", a: "Höfn" },
-    geo: { de: "Egilsstaðir", a: "Höfn" },
+    geo: { de: "Hótel 1001 Nótt Egilsstaðir", a: "Sefdalur Höfn" },
     distanceKm: 250,
     nuit: "Sefdalur (région Höfn) — réservé",
     note: "Route des fjords de l'Est jusqu'à la région de Höfn, aux portes du Vatnajökull. Nuit à Sefdalur.",
@@ -217,7 +217,7 @@ const JOURS = [
     titre: "Glaciers du Sud — Jökulsárlón & Skaftafell",
     region: "Sud",
     trajet: { de: "Höfn (Sefdalur)", a: "Kirkjubæjarklaustur" },
-    geo: { de: "Höfn", a: "Kirkjubæjarklaustur" },
+    geo: { de: "Sefdalur Höfn", a: "Adventure Hotel Geirland" },
     distanceKm: 210,
     nuit: "Adventure Hotel Geirland, Kirkjubæjarklaustur — réservé",
     note: "LA journée glaciers du sud, d'est en ouest : lagunes le matin, excursion sur glacier l'après-midi. Partir tôt pour tout caser. Nuit à Geirland (Kirkjubæjarklaustur).",
@@ -237,7 +237,7 @@ const JOURS = [
     titre: "Côte sud → Hella",
     region: "Sud",
     trajet: { de: "Kirkjubæjarklaustur", a: "Hella" },
-    geo: { de: "Kirkjubæjarklaustur", a: "Hella" },
+    geo: { de: "Adventure Hotel Geirland", a: "Riverfront Lodge Hella" },
     distanceKm: 190,
     nuit: "Riverfront Lodge Hella — réservé (nuit 1/2)",
     note: "Les incontournables de la côte sud d'est en ouest, jusqu'à la base de Hella pour 2 nuits.",
@@ -259,7 +259,7 @@ const JOURS = [
     titre: "Journée libre (base Hella)",
     region: "Sud",
     trajet: { de: "Hella", a: "Hella (au choix)" },
-    geo: { de: "Hella", a: "Hella" },
+    geo: { de: "Riverfront Lodge Hella", a: "Riverfront Lodge Hella" },
     distanceKm: 100,
     nuit: "Riverfront Lodge Hella — réservé (nuit 2/2)",
     note: "Journée souple depuis Hella : au choix selon la météo et l'envie. Sert aussi de tampon si une visite a été reportée.",
@@ -279,9 +279,9 @@ const JOURS = [
     titre: "Retour à Reykjavík",
     region: "Capitale",
     trajet: { de: "Hella", a: "Reykjavík" },
-    geo: { de: "Hella", a: "Reykjavík" },
+    geo: { de: "Riverfront Lodge Hella", a: "Oddsson Midtown Hotel Reykjavik" },
     distanceKm: 95,
-    nuit: "Reykjavík",
+    nuit: "Oddsson Midtown Hotel, Reykjavík — réservé (nuit 1/2)",
     note: "Fin du road trip : restitution de la voiture à Reykjavík. Après-midi/soirée pour visiter la capitale.",
     activites: [
       { nom: "Hallgrímskirkja", type: "ville", maps: "Hallgrimskirkja",
@@ -297,9 +297,9 @@ const JOURS = [
     titre: "Cercle d'Or (excursion guidée)",
     region: "Sud-Ouest",
     trajet: { de: "Reykjavík", a: "Reykjavík (excursion)" },
-    geo: { de: "Reykjavík", a: "Reykjavík" },
+    geo: { de: "Oddsson Midtown Hotel Reykjavik", a: "Oddsson Midtown Hotel Reykjavik" },
     distanceKm: 0,
-    nuit: "Reykjavík",
+    nuit: "Oddsson Midtown Hotel, Reykjavík — réservé (nuit 2/2)",
     note: "Voiture déjà rendue → excursion organisée à la journée depuis Reykjavík.",
     activites: [
       { nom: "Parc national de Þingvellir", type: "histoire", maps: "Thingvellir National Park",
@@ -315,7 +315,7 @@ const JOURS = [
     titre: "Départ",
     region: "Capitale → Aéroport",
     trajet: { de: "Reykjavík", a: "Aéroport de Keflavík" },
-    geo: { de: "Reykjavík", a: "Keflavík Airport" },
+    geo: { de: "Oddsson Midtown Hotel Reykjavik", a: "Keflavík Airport" },
     distanceKm: 50,
     nuit: "—",
     note: "Voiture rendue : prévoir une navette (Flybus, ~45–50 min) ou un taxi vers l'aéroport.",
@@ -347,9 +347,19 @@ const ETAPES = JOURS.map((j, i) => ({
 
 /* Grandes étapes (hubs) pour le lien « itinéraire complet » Google Maps.
    Liste resserrée (≤ 10 points) pour rester dans la limite de Maps. */
+/* Chaîne des hébergements (points Maps) pour le lien « itinéraire complet ».
+   ≤ 10 points pour rester dans la limite de Google Maps. Maps relie ces
+   hôtels par la route 1 ; les villes proches sont implicitement traversées. */
 const ITINERAIRE_HUBS = [
-  "Keflavík Airport", "Borgarnes", "Akureyri", "Mývatn",
-  "Egilsstaðir", "Höfn", "Vík", "Reykjavík", "Keflavík Airport"
+  "Keflavík Airport",
+  "Bjarg Borgarnes",
+  "Hótel Laugar Reykjadalur",
+  "Hótel 1001 Nótt Egilsstaðir",
+  "Sefdalur Höfn",
+  "Adventure Hotel Geirland",
+  "Riverfront Lodge Hella",
+  "Oddsson Midtown Hotel Reykjavik",
+  "Keflavík Airport"
 ];
 
 /* Total des kilomètres du road trip (jusqu'à la restitution de la voiture le 15/07). */
@@ -407,10 +417,10 @@ const BAGAGES_DEFAUT = [
    statut ∈ { "à faire", "réservé", "payé" }
    --------------------------------------------------------------------- */
 const RESERVATIONS_DEFAUT = [
-  { type: "Vol", libelle: "Vol aller-retour", date: "2026-07-03", confirmation: "", statut: "réservé" },
-  { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "réservé" },
+  { type: "Vol", libelle: "Vol aller-retour", date: "2026-07-03", confirmation: "", statut: "payé" },
+  { type: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", date: "2026-07-03", confirmation: "", statut: "payé" },
   { type: "Activité", libelle: "Blue Lagoon (si baignade)", date: "2026-07-03", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Bjarg Borgarnes — guesthouse, 3 nuits (Bjarg, 310 Borgarnes)", date: "2026-07-03", confirmation: "", statut: "réservé" },
+  { type: "Hôtel", libelle: "Bjarg Borgarnes — 3 nuits, 489 € (Bjarg, 310 Borgarnes)", date: "2026-07-03", confirmation: "GODO-1398864", statut: "payé" },
   { type: "Hôtel", libelle: "Hótel Laugar — 3 nuits, 655,65 € (région Húsavík)", date: "2026-07-06", confirmation: "", statut: "payé" },
   { type: "Activité", libelle: "Baleines Húsavík (North Sailing)", date: "2026-07-08", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Hotel 1001 Nótt — 2 nuits, 575 € (Álfaás 1, 701 Egilsstaðir)", date: "2026-07-09", confirmation: "", statut: "payé" },
@@ -419,7 +429,7 @@ const RESERVATIONS_DEFAUT = [
   { type: "Activité", libelle: "Rando sur glacier Skaftafell", date: "2026-07-12", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Adventure Hotel Geirland — 1 nuit, 295,10 € (Kirkjubæjarklaustur)", date: "2026-07-12", confirmation: "", statut: "payé" },
   { type: "Hôtel", libelle: "Riverfront Lodge Hella — 2 nuits, 450,50 €", date: "2026-07-13", confirmation: "", statut: "payé" },
-  { type: "Hôtel", libelle: "Reykjavík (2 nuits)", date: "2026-07-15", confirmation: "", statut: "à faire" },
+  { type: "Hôtel", libelle: "Oddsson Midtown Hotel — 2 nuits, 482 € (Reykjavík)", date: "2026-07-15", confirmation: "GODO-1397926", statut: "payé" },
   { type: "Activité", libelle: "Excursion Cercle d'Or", date: "2026-07-16", confirmation: "", statut: "à faire" },
   { type: "Transport", libelle: "Navette aéroport (Flybus)", date: "2026-07-17", confirmation: "", statut: "à faire" }
 ];
@@ -435,11 +445,13 @@ const CATEGORIES_DEPENSES = [
    Les hébergements confirmés/payés. À compléter dans la page Dépenses.
    --------------------------------------------------------------------- */
 const DEPENSES_DEFAUT = [
-  { date: "2026-07-03", categorie: "Vol", libelle: "Vol aller-retour (≈ 1000 $, à ajuster)", montant: 920 },
-  { date: "2026-07-03", categorie: "Voiture", libelle: "Location voiture (≈ 1500 $, à ajuster)", montant: 1380 },
+  { date: "2026-07-03", categorie: "Vol", libelle: "Vol aller-retour", montant: 1000 },
+  { date: "2026-07-03", categorie: "Voiture", libelle: "Location voiture (Keflavík → Reykjavík)", montant: 1500 },
+  { date: "2026-07-03", categorie: "Hébergement", libelle: "Bjarg Borgarnes (3 nuits)", montant: 489 },
   { date: "2026-07-06", categorie: "Hébergement", libelle: "Hótel Laugar (3 nuits)", montant: 655.65 },
   { date: "2026-07-09", categorie: "Hébergement", libelle: "Hotel 1001 Nótt (2 nuits)", montant: 575 },
   { date: "2026-07-11", categorie: "Hébergement", libelle: "Sefdalur (1 nuit)", montant: 214.20 },
   { date: "2026-07-12", categorie: "Hébergement", libelle: "Adventure Hotel Geirland (1 nuit)", montant: 295.10 },
-  { date: "2026-07-13", categorie: "Hébergement", libelle: "Riverfront Lodge Hella (2 nuits)", montant: 450.50 }
+  { date: "2026-07-13", categorie: "Hébergement", libelle: "Riverfront Lodge Hella (2 nuits)", montant: 450.50 },
+  { date: "2026-07-15", categorie: "Hébergement", libelle: "Oddsson Midtown Hotel (2 nuits)", montant: 482 }
 ];

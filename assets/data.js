@@ -163,7 +163,7 @@ const JOURS = [
     trajet: { de: "Hôtel Laugar", a: "Egilsstaðir" },
     geo: { de: "Laugar 650 Iceland", a: "Egilsstaðir" },
     distanceKm: 250,
-    nuit: "Hotel 1001 Nótt (Est) — réservé (nuit 1/2)",
+    nuit: "Hotel 1001 Nótt, Egilsstaðir — réservé (nuit 1/2)",
     note: "Reprise du tour de l'île vers l'est, via les hauts plateaux désertiques.",
     activites: [
       { nom: "Désert de Möðrudalur", type: "route", maps: "Modrudalur",
@@ -181,7 +181,7 @@ const JOURS = [
     trajet: { de: "Egilsstaðir", a: "Egilsstaðir (boucle)" },
     geo: { de: "Egilsstaðir", a: "Egilsstaðir" },
     distanceKm: 120,
-    nuit: "Hotel 1001 Nótt (Est) — réservé (nuit 2/2)",
+    nuit: "Hotel 1001 Nótt, Egilsstaðir — réservé (nuit 2/2)",
     note: "Journée nature/rando autour d'Egilsstaðir.",
     activites: [
       { nom: "Rando de Hengifoss", type: "rando", maps: "Hengifoss trail",
@@ -413,8 +413,8 @@ const RESERVATIONS_DEFAUT = [
   { type: "Hôtel", libelle: "Bjarg Borgarnes — guesthouse, 3 nuits (Bjarg, 310 Borgarnes)", date: "2026-07-03", confirmation: "", statut: "réservé" },
   { type: "Hôtel", libelle: "Hótel Laugar — 3 nuits, 655,65 € (région Húsavík)", date: "2026-07-06", confirmation: "", statut: "payé" },
   { type: "Activité", libelle: "Baleines Húsavík (North Sailing)", date: "2026-07-08", confirmation: "", statut: "à faire" },
-  { type: "Hôtel", libelle: "Hotel 1001 Nótt — 2 nuits, 575 € (Est)", date: "2026-07-09", confirmation: "", statut: "payé" },
-  { type: "Hôtel", libelle: "Sefdalur — 1 nuit, 214,20 € (région Höfn)", date: "2026-07-11", confirmation: "", statut: "payé" },
+  { type: "Hôtel", libelle: "Hotel 1001 Nótt — 2 nuits, 575 € (Álfaás 1, 701 Egilsstaðir)", date: "2026-07-09", confirmation: "", statut: "payé" },
+  { type: "Hôtel", libelle: "Sefdalur — 1 nuit, 214,20 € (Hagi 2, 781 Höfn)", date: "2026-07-11", confirmation: "", statut: "payé" },
   { type: "Activité", libelle: "Croisière Jökulsárlón", date: "2026-07-12", confirmation: "", statut: "à faire" },
   { type: "Activité", libelle: "Rando sur glacier Skaftafell", date: "2026-07-12", confirmation: "", statut: "à faire" },
   { type: "Hôtel", libelle: "Adventure Hotel Geirland — 1 nuit, 295,10 € (Kirkjubæjarklaustur)", date: "2026-07-12", confirmation: "", statut: "payé" },
@@ -435,6 +435,8 @@ const CATEGORIES_DEPENSES = [
    Les hébergements confirmés/payés. À compléter dans la page Dépenses.
    --------------------------------------------------------------------- */
 const DEPENSES_DEFAUT = [
+  { date: "2026-07-03", categorie: "Vol", libelle: "Vol aller-retour (≈ 1000 $, à ajuster)", montant: 920 },
+  { date: "2026-07-03", categorie: "Voiture", libelle: "Location voiture (≈ 1500 $, à ajuster)", montant: 1380 },
   { date: "2026-07-06", categorie: "Hébergement", libelle: "Hótel Laugar (3 nuits)", montant: 655.65 },
   { date: "2026-07-09", categorie: "Hébergement", libelle: "Hotel 1001 Nótt (2 nuits)", montant: 575 },
   { date: "2026-07-11", categorie: "Hébergement", libelle: "Sefdalur (1 nuit)", montant: 214.20 },

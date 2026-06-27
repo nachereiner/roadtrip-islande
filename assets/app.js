@@ -107,6 +107,7 @@ const ICONS = {
   info:     ["M12 3a9 9 0 100 18 9 9 0 000-18z", "M12 11v5", "M12 7.5h.01"],
   sun:      ["M12 8a4 4 0 100 8 4 4 0 000-8z", "M12 3v2", "M12 19v2", "M5 5l1.5 1.5", "M17.5 17.5 19 19", "M3 12h2", "M19 12h2", "M5 19l1.5-1.5", "M17.5 6.5 19 5"],
   moon:     ["M20 14a8 8 0 11-9-11 6 6 0 009 11z"],
+  chevron:  ["M6 9l6 6 6-6"],
   _default: ["M12 21s7-6 7-12a7 7 0 10-14 0c0 6 7 12 7 12z", "M12 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"]
 };
 function iconSvg(name, size = 20, cls = "ic") {
@@ -320,8 +321,12 @@ function initJours() {
         el("h2", {}, j.titre),
         el("div", { class: "meta" }, `${JOURS_SEM[j.jour]} · ${j.region}`)),
       buildCarte({ mini: true, hereDate: j.date }),
-      el("span", { class: "day-tag" }, j.etiquette)
+      el("span", { class: "day-tag" }, j.etiquette),
+      el("span", { class: "day-chevron" }, iconSvg("chevron", 18))
     );
+    head.setAttribute("role", "button");
+    head.setAttribute("tabindex", "0");
+    head.setAttribute("aria-expanded", "true");
 
     const body = el("div", { class: "day-body" });
     const route = el("div", { class: "route-line" },
@@ -349,6 +354,11 @@ function initJours() {
     body.appendChild(acts);
 
     const dayEl = el("article", { class: "day" + (j.date === t ? " is-today" : ""), id: j.date }, head, body);
+    const setCollapsed = c => { dayEl.classList.toggle("collapsed", c); head.setAttribute("aria-expanded", String(!c)); };
+    head.addEventListener("click", () => setCollapsed(!dayEl.classList.contains("collapsed")));
+    head.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === " ") { e.preventDefault(); setCollapsed(!dayEl.classList.contains("collapsed")); }
+    });
     root.appendChild(dayEl);
 
     // connecteur « km » vers l'étape suivante
@@ -359,7 +369,19 @@ function initJours() {
   // sommaire de navigation rapide
   const nav = $("#day-nav");
   if (nav) JOURS.forEach(j => nav.appendChild(
-    el("a", { class: "chip", href: "#" + j.date }, `${dayNum(j.date)}/07`)));
+    el("a", { class: "chip", href: "#" + j.date, onclick: () => {
+      const d = document.getElementById(j.date);
+      if (d) { d.classList.remove("collapsed"); d.querySelector(".day-head").setAttribute("aria-expanded", "true"); }
+    } }, `${dayNum(j.date)}/07`)));
+
+  // tout réduire / tout déplier
+  const allBtn = $("#days-toggle-all");
+  if (allBtn) allBtn.addEventListener("click", () => {
+    const days = $$(".day", root);
+    const anyOpen = days.some(d => !d.classList.contains("collapsed"));
+    days.forEach(d => { d.classList.toggle("collapsed", anyOpen); d.querySelector(".day-head").setAttribute("aria-expanded", String(!anyOpen)); });
+    allBtn.textContent = anyOpen ? "Tout déplier" : "Tout réduire";
+  });
 }
 
 /* ===========================================================

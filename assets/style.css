@@ -39,6 +39,8 @@
   --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --font-mono: "Space Mono", ui-monospace, "SFMono-Regular", Menlo, monospace;
 
+  --header-bg: rgba(238, 241, 240, .88);
+  --today-grad: linear-gradient(180deg, #ffffff, var(--paper));
   --radius: 12px;
   --radius-lg: 18px;
   --shadow: 0 1px 2px rgba(22,25,28,.05), 0 8px 24px rgba(22,25,28,.06);
@@ -60,6 +62,8 @@ html[data-theme="dark"] {
   --sulfur:   #ecb04a;
   --sulfur-s: #3a2f18;
   --lava:     #e07a5f;
+  --header-bg: rgba(17, 22, 26, .9);
+  --today-grad: linear-gradient(180deg, #20303a, var(--paper));
 }
 html[data-theme="dark"] input,
 html[data-theme="dark"] select,
@@ -100,7 +104,7 @@ a { color: var(--glacier); }
 /* ---------- En-tête + navigation ---------- */
 .site-header {
   position: sticky; top: 0; z-index: 30;
-  background: rgba(238,241,240,.88);
+  background: var(--header-bg);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid var(--line);
 }
@@ -186,7 +190,7 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
 /* ---------- Aujourd'hui / prochaine étape ---------- */
 .today {
   border: 1px solid var(--glacier); border-left: 5px solid var(--sulfur);
-  background: linear-gradient(180deg, #fff, var(--paper));
+  background: var(--today-grad);
   border-radius: var(--radius); padding: 1rem 1.2rem; box-shadow: var(--shadow); margin-bottom: 1.3rem;
 }
 .today .lead { display: flex; align-items: center; gap: .6rem; flex-wrap: wrap; }
@@ -253,6 +257,12 @@ main { max-width: var(--maxw); margin: 0 auto; padding: 1.6rem 1.1rem 4rem; }
 .day-titles h2 { margin: 0; font-size: 1.12rem; }
 .day-titles .meta { color: var(--muted); font-family: var(--font-mono); font-size: .76rem; }
 .day-tag { font-family: var(--font-mono); font-size: .68rem; color: var(--muted); border: 1px solid var(--line); border-radius: 999px; padding: .15rem .55rem; }
+.day-head { cursor: pointer; user-select: none; }
+.day-chevron { color: var(--muted); display: inline-flex; transition: transform .2s; flex: 0 0 auto; }
+.day-head:hover .day-chevron { color: var(--glacier); }
+.day.collapsed .day-chevron { transform: rotate(-90deg); }
+.day.collapsed .day-body { display: none; }
+.day.collapsed .day-head { border-bottom: none; }
 
 .day-body { padding: .7rem 1.1rem 1rem; }
 .route-line { font-family: var(--font-mono); color: var(--moss); font-size: .82rem; margin: .25rem 0 .35rem; display: flex; align-items: center; gap: .5rem; flex-wrap: wrap; }

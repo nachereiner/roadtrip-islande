@@ -455,3 +455,33 @@ const DEPENSES_DEFAUT = [
   { date: "2026-07-13", categorie: "Hébergement", libelle: "Riverfront Lodge Hella (2 nuits)", montant: 450.50 },
   { date: "2026-07-15", categorie: "Hébergement", libelle: "Oddsson Midtown Hotel (2 nuits)", montant: 482 }
 ];
+
+/* ---------------------------------------------------------------------
+   CARTE — silhouette stylisée de l'Islande (faceted) + étapes (hôtels).
+   Coordonnées en unités du viewBox (placées pour coller à la silhouette).
+   `dates` relie chaque étape aux jours pour le mini-locator « ici ».
+   --------------------------------------------------------------------- */
+const CARTE = {
+  viewBox: "0 0 1000 560",
+  silhouette: "M165,448 L150,400 L140,360 L70,330 L150,320 L178,298 L150,205 L92,165 L152,118 L300,100 L470,120 L520,95 L560,120 L660,108 L772,120 L882,166 L905,250 L878,322 L800,400 L720,420 L540,452 L360,456 L240,450 Z",
+  stops: [
+    { n: "✈", nom: "Aéroport de Keflavík",        x: 165, y: 442, air: true,
+      dates: ["2026-07-17"] },
+    { n: 1, nom: "Bjarg Borgarnes",                x: 235, y: 355,
+      dates: ["2026-07-03", "2026-07-04", "2026-07-05"] },
+    { n: 2, nom: "Hótel Laugar",                   x: 600, y: 165,
+      dates: ["2026-07-06", "2026-07-07", "2026-07-08"] },
+    { n: 3, nom: "Hotel 1001 Nótt · Egilsstaðir",  x: 835, y: 240,
+      dates: ["2026-07-09", "2026-07-10"] },
+    { n: 4, nom: "Sefdalur · Höfn",                x: 755, y: 380,
+      dates: ["2026-07-11"] },
+    { n: 5, nom: "Geirland · Kirkjubæjarklaustur", x: 545, y: 432,
+      dates: ["2026-07-12"] },
+    { n: 6, nom: "Riverfront Lodge · Hella",       x: 350, y: 422,
+      dates: ["2026-07-13", "2026-07-14"] },
+    { n: 7, nom: "Oddsson · Reykjavík",            x: 205, y: 405,
+      dates: ["2026-07-15", "2026-07-16"] }
+  ],
+  /* ordre du tracé de la route (le ✈ ouvre et ferme la boucle) */
+  routeOrder: ["✈", 1, 2, 3, 4, 5, 6, 7, "✈"]
+};

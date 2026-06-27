@@ -22,6 +22,26 @@ const el = (tag, props = {}, ...kids) => {
   return n;
 };
 
+/* ---------- Thème clair/sombre (préférence mémorisée) ---------- */
+const THEME_KEY = "roadtrip.theme";
+(function () {
+  try {
+    const t = localStorage.getItem(THEME_KEY);
+    if (t === "dark" || t === "light") document.documentElement.setAttribute("data-theme", t);
+  } catch (e) {}
+})();
+function currentTheme() { return document.documentElement.getAttribute("data-theme") === "dark" ? "dark" : "light"; }
+function toggleTheme(btn) {
+  const next = currentTheme() === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
+  if (btn) {
+    btn.innerHTML = "";
+    btn.appendChild(iconSvg(next === "dark" ? "sun" : "moon", 18));
+    btn.setAttribute("aria-label", next === "dark" ? "Passer en thème clair" : "Passer en thème sombre");
+  }
+}
+
 const MOIS = ["janv.","févr.","mars","avr.","mai","juin","juil.","août","sept.","oct.","nov.","déc."];
 const JOURS_SEM = { Lun:"Lundi", Mar:"Mardi", Mer:"Mercredi", Jeu:"Jeudi", Ven:"Vendredi", Sam:"Samedi", Dim:"Dimanche" };
 
@@ -85,6 +105,8 @@ const ICONS = {
   clipboard:["M9 4h6v3H9z", "M8 5H6v15h12V5h-2", "M9 11h6", "M9 15h6"],
   backpack: ["M7 9a5 5 0 0110 0v11H7z", "M9.5 9V7a2.5 2.5 0 015 0v2", "M9 13h6"],
   info:     ["M12 3a9 9 0 100 18 9 9 0 000-18z", "M12 11v5", "M12 7.5h.01"],
+  sun:      ["M12 8a4 4 0 100 8 4 4 0 000-8z", "M12 3v2", "M12 19v2", "M5 5l1.5 1.5", "M17.5 17.5 19 19", "M3 12h2", "M19 12h2", "M5 19l1.5-1.5", "M17.5 6.5 19 5"],
+  moon:     ["M20 14a8 8 0 11-9-11 6 6 0 009 11z"],
   _default: ["M12 21s7-6 7-12a7 7 0 10-14 0c0 6 7 12 7 12z", "M12 9a2.5 2.5 0 100 5 2.5 2.5 0 000-5z"]
 };
 function iconSvg(name, size = 20, cls = "ic") {
@@ -211,15 +233,23 @@ function buildChrome() {
         el("span", {}, VOYAGE.titre),
         el("small", {}, "3–17 juil. 2026")),
       el("nav", { class: "tabs" },
-        PAGES.map(p => el("a", { href: p.href, class: here === p.href ? "active" : "" }, p.label)))
+        PAGES.map(p => el("a", { href: p.href, class: here === p.href ? "active" : "" }, p.label))),
+      themeToggle()
     )
   );
   document.body.insertBefore(header, document.body.firstChild);
 
   const footer = el("footer", { class: "site-footer" },
-    "Road trip Islande · données dans assets/data.js · dépenses & checklist enregistrées dans ce navigateur."
+    "Road trip Islande · données dans assets/data.js · checklist bagages enregistrée dans ce navigateur."
   );
   document.body.appendChild(footer);
+}
+function themeToggle() {
+  const btn = el("button", { class: "theme-toggle", type: "button",
+    "aria-label": currentTheme() === "dark" ? "Passer en thème clair" : "Passer en thème sombre" });
+  btn.appendChild(iconSvg(currentTheme() === "dark" ? "sun" : "moon", 18));
+  btn.addEventListener("click", () => toggleTheme(btn));
+  return btn;
 }
 
 /* ===========================================================
@@ -369,156 +399,84 @@ function initItineraire() {
 /* ===========================================================
    PAGE : Dépenses
    =========================================================== */
+const DONUT_COLORS = ["#2f6e84", "#5e7444", "#e0922b", "#b8432a", "#22566a", "#8a9b6a", "#c9803a", "#6b7b82"];
+
+function buildDonut(cats, total) {
+  const r = 60, C = 2 * Math.PI * r, cx = 80, cy = 80;
+  const svg = svgEl("svg", { class: "donut", viewBox: "0 0 160 160", width: 160, height: 160,
+    role: "img", "aria-label": "Répartition des dépenses par poste" });
+  svg.appendChild(svgEl("circle", { cx, cy, r, fill: "none", stroke: "var(--ice-2)", "stroke-width": 26 }));
+  let off = 0;
+  cats.forEach(([c, v], i) => {
+    const f = total ? v / total : 0;
+    svg.appendChild(svgEl("circle", { cx, cy, r, fill: "none",
+      stroke: DONUT_COLORS[i % DONUT_COLORS.length], "stroke-width": 26,
+      "stroke-dasharray": `${f * C} ${C}`, "stroke-dashoffset": `${-off * C}`,
+      transform: `rotate(-90 ${cx} ${cy})` }));
+    off += f;
+  });
+  svg.appendChild(svgEl("text", { x: cx, y: cy - 3, class: "donut-c1" }, Math.round(total).toLocaleString("fr-FR") + " €"));
+  svg.appendChild(svgEl("text", { x: cx, y: cy + 14, class: "donut-c2" }, "total"));
+  return svg;
+}
+
+/* Page Dépenses — statique (lecture seule depuis DEPENSES_DEFAUT). */
 function initDepenses() {
-  // 1er chargement : on pré-remplit avec les dépenses déjà engagées (hébergements payés).
-  let rows = store.get(KEYS.depenses, null);
-  if (!rows) { rows = JSON.parse(JSON.stringify(DEPENSES_DEFAUT)); store.set(KEYS.depenses, rows); }
-  const tbody = $("#dep-body");
+  const rows = DEPENSES_DEFAUT;
+  const total = rows.reduce((s, r) => s + (Number(r.montant) || 0), 0);
+  const byCat = {};
+  rows.forEach(r => { const c = r.categorie || "Autre"; byCat[c] = (byCat[c] || 0) + (Number(r.montant) || 0); });
+  const cats = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
 
-  function persist() { store.set(KEYS.depenses, rows); }
-
-  function render() {
-    tbody.innerHTML = "";
-    rows.forEach((r, i) => {
-      const tr = el("tr", {},
-        el("td", {}, input("date", r.date, v => { r.date = v; persist(); })),
-        el("td", {}, selectCat(r.categorie, v => { r.categorie = v; persist(); })),
-        el("td", {}, input("text", r.libelle, v => { r.libelle = v; persist(); }, "Libellé")),
-        el("td", { class: "num" }, input("number", r.montant, v => { r.montant = parseFloat(v) || 0; persist(); renderTotals(); }, "0", "0.01")),
-        el("td", {}, el("button", { class: "icon-del", title: "Supprimer",
-          onclick: () => { rows.splice(i, 1); persist(); render(); renderTotals(); } }, "🗑"))
-      );
-      tbody.appendChild(tr);
-    });
-    if (!rows.length) {
-      tbody.appendChild(el("tr", {}, el("td", { colspan: "5", class: "muted" }, "Aucune dépense pour l'instant. Cliquez sur « Ajouter une dépense ».")));
-    }
+  // Donut + légende
+  const chart = $("#dep-chart");
+  if (chart && total) {
+    chart.appendChild(el("h2", {}, "Répartition par poste"));
+    const legend = el("div", { class: "donut-legend" });
+    cats.forEach(([c, v], i) => legend.appendChild(el("div", { class: "dl-row" },
+      el("span", { class: "dot", style: `background:${DONUT_COLORS[i % DONUT_COLORS.length]}` }),
+      el("span", { class: "dl-cat" }, c),
+      el("span", { class: "dl-amt" }, eur(v)),
+      el("span", { class: "dl-pct" }, Math.round((v / total) * 100) + "%"))));
+    chart.appendChild(el("div", { class: "donut-wrap" }, buildDonut(cats, total), legend));
   }
 
-  function renderTotals() {
-    const total = rows.reduce((s, r) => s + (Number(r.montant) || 0), 0);
-    const byCat = {};
-    rows.forEach(r => { const c = r.categorie || "Autre"; byCat[c] = (byCat[c] || 0) + (Number(r.montant) || 0); });
-    const cats = Object.entries(byCat).sort((a, b) => b[1] - a[1]);
-
-    const box = $("#dep-totaux");
-    box.innerHTML = "";
-    box.appendChild(el("div", { class: "tot-card grand-total" },
-      el("div", { class: "k" }, "Total dépensé"), el("div", { class: "v" }, eur(total))));
-    cats.forEach(([c, v]) =>
-      box.appendChild(el("div", { class: "tot-card" }, el("div", { class: "k" }, c), el("div", { class: "v" }, eur(v)))));
-
-    // Graphe par poste
-    const chart = $("#dep-chart");
-    if (chart) {
-      chart.innerHTML = "";
-      if (!total) { chart.appendChild(el("p", { class: "muted" }, "Ajoutez des dépenses pour voir la répartition par poste.")); return; }
-      const max = Math.max(...cats.map(c => c[1]));
-      chart.appendChild(el("h2", {}, "Répartition par poste"));
-      cats.forEach(([c, v]) => {
-        chart.appendChild(el("div", { class: "exp-row" },
-          el("span", { class: "lbl" }, c),
-          el("div", { class: "track" }, el("div", { class: "bar", style: `width:${(v / max) * 100}%` })),
-          el("span", { class: "amt" }, eur(v))));
-      });
-    }
-  }
-
-  function input(type, value, onchange, placeholder, step) {
-    const props = { type, value: value ?? "" };
-    if (placeholder) props.placeholder = placeholder;
-    if (step) props.step = step;
-    if (type === "number") props.min = "0";
-    const n = el("input", props);
-    n.addEventListener("input", e => onchange(e.target.value));
-    return n;
-  }
-  function selectCat(value, onchange) {
-    const s = el("select", {});
-    CATEGORIES_DEPENSES.forEach(c => s.appendChild(el("option", { value: c }, c)));
-    s.value = value || CATEGORIES_DEPENSES[CATEGORIES_DEPENSES.length - 1];
-    s.addEventListener("change", e => onchange(e.target.value));
-    return s;
-  }
-
-  $("#dep-add").addEventListener("click", () => {
-    rows.push({ date: VOYAGE.dateDebut, categorie: "Autre", libelle: "", montant: 0 });
-    persist(); render(); renderTotals();
+  // Tableau (lecture seule, trié par date)
+  const tb = $("#dep-body");
+  if (tb) rows.slice().sort((a, b) => a.date.localeCompare(b.date)).forEach(r => {
+    tb.appendChild(el("tr", {},
+      el("td", { class: "mono" }, fmtDate(r.date)),
+      el("td", {}, el("span", { class: "tag-cat" }, r.categorie)),
+      el("td", {}, r.libelle),
+      el("td", { class: "num" }, eur(r.montant))));
   });
-  $("#dep-export").addEventListener("click", () => exportJSON("depenses-islande.json", rows));
-  $("#dep-import").addEventListener("change", e => importJSON(e, data => {
-    if (Array.isArray(data)) { rows = data; persist(); render(); renderTotals(); }
-    else alert("Fichier invalide : un tableau de dépenses était attendu.");
-  }));
-  const reset = $("#dep-reset");
-  if (reset) reset.addEventListener("click", () => {
-    if (confirm("Recharger les dépenses pré-remplies (hébergements) ? Vos saisies seront perdues.")) {
-      rows = JSON.parse(JSON.stringify(DEPENSES_DEFAUT)); persist(); render(); renderTotals();
-    }
-  });
-
-  render(); renderTotals();
+  const totEl = $("#dep-total");
+  if (totEl) totEl.textContent = eur(total);
 }
 
 /* ===========================================================
    PAGE : Réservations
    =========================================================== */
+/* Page Réservations — statique (lecture seule depuis RESERVATIONS_DEFAUT). */
 function initReservations() {
-  let rows = store.get(KEYS.reservations, null);
-  if (!rows) { rows = JSON.parse(JSON.stringify(RESERVATIONS_DEFAUT)); store.set(KEYS.reservations, rows); }
+  const rows = RESERVATIONS_DEFAUT;
   const tbody = $("#resa-body");
-  const STATUTS = ["à faire", "réservé", "payé"];
   const statusClass = s => s === "payé" ? "paye" : s === "réservé" ? "resa" : "todo";
 
-  function persist() { store.set(KEYS.reservations, rows); }
-  function render() {
-    tbody.innerHTML = "";
-    rows.forEach((r, i) => {
-      const sel = el("select", {});
-      STATUTS.forEach(s => sel.appendChild(el("option", { value: s }, s)));
-      sel.value = r.statut;
-      sel.addEventListener("change", e => { r.statut = e.target.value; persist(); paint(); });
-      const tr = el("tr", {},
-        el("td", {}, txt(r.type, v => r.type = v)),
-        el("td", {}, txt(r.libelle, v => r.libelle = v)),
-        el("td", {}, txt(r.date, v => r.date = v, "date")),
-        el("td", {}, txt(r.confirmation, v => r.confirmation = v, "text", "N°")),
-        el("td", {}, sel),
-        el("td", {}, el("button", { class: "icon-del", title: "Supprimer",
-          onclick: () => { rows.splice(i, 1); persist(); render(); } }, "🗑"))
-      );
-      tr.dataset.idx = i;
-      tbody.appendChild(tr);
-    });
-    paint();
-  }
-  function paint() {
-    $$("#resa-body select").forEach(s => { s.className = "status " + statusClass(s.value); });
+  if (tbody) rows.forEach(r => {
+    tbody.appendChild(el("tr", {},
+      el("td", {}, r.type),
+      el("td", {}, r.libelle),
+      el("td", { class: "mono" }, r.date ? fmtDate(r.date) : "—"),
+      el("td", { class: "mono" }, r.confirmation || "—"),
+      el("td", {}, el("span", { class: "status " + statusClass(r.statut) }, r.statut))));
+  });
+
+  const c = $("#resa-count");
+  if (c) {
     const done = rows.filter(r => r.statut !== "à faire").length;
-    $("#resa-count").textContent = `${done} / ${rows.length} traitées`;
+    c.textContent = `${done} / ${rows.length} traitées`;
   }
-  function txt(value, onchange, type = "text", ph = "") {
-    const n = el("input", { type, value: value ?? "", placeholder: ph });
-    n.addEventListener("input", e => { onchange(e.target.value); persist(); });
-    return n;
-  }
-
-  $("#resa-add").addEventListener("click", () => {
-    rows.push({ type: "Autre", libelle: "", date: "", confirmation: "", statut: "à faire" });
-    persist(); render();
-  });
-  $("#resa-reset").addEventListener("click", () => {
-    if (confirm("Réinitialiser la liste de réservations par défaut ? Vos modifications seront perdues.")) {
-      rows = JSON.parse(JSON.stringify(RESERVATIONS_DEFAUT)); persist(); render();
-    }
-  });
-  $("#resa-export").addEventListener("click", () => exportJSON("reservations-islande.json", rows));
-  $("#resa-import").addEventListener("change", e => importJSON(e, data => {
-    if (Array.isArray(data)) { rows = data; persist(); render(); }
-    else alert("Fichier invalide.");
-  }));
-
-  render();
 }
 
 /* ===========================================================

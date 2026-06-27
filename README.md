@@ -20,30 +20,27 @@ Double-cliquez sur **`index.html`** (s'ouvre dans le navigateur). Fonctionne **h
 
 ## Modifier le voyage
 
-Tout le contenu de l'itinéraire vit dans **`assets/data.js`** (un seul fichier) :
+Tout le contenu vit dans **`assets/data.js`** (un seul fichier) :
 - `JOURS` : une entrée par journée (titre, trajet, distance, nuit, activités).
-- `ETAPES` / `TOTAL_KM_ROADTRIP` : calculés automatiquement depuis `JOURS`.
-- `BAGAGES_DEFAUT`, `RESERVATIONS_DEFAUT`, `CATEGORIES_DEPENSES` : listes par défaut.
+- `ETAPES` / `TOTAL_KM_ROADTRIP` / `ITINERAIRE_HUBS` / `CARTE` : itinéraire et carte.
+- `DEPENSES_DEFAUT` : les dépenses (page Dépenses, **statique**).
+- `RESERVATIONS_DEFAUT` : l'état des réservations (page Réservations, **statique**).
+- `BAGAGES_DEFAUT` : la checklist bagages.
 
 Modifiez ce fichier puis rechargez la page — pas de compilation.
 
-## Où sont stockées mes données ?
+## Données & stockage
 
-Les **dépenses**, **réservations** et l'état de la **checklist** sont enregistrés dans le `localStorage` du navigateur (sur cet appareil, ce navigateur). Ils persistent après fermeture.
-
-- Boutons **Exporter** (dépenses / réservations) → téléchargent une sauvegarde `.json`.
-- Bouton **Importer** → recharge une sauvegarde (utile pour changer d'appareil).
-
-> ⚠️ Vider les données de navigation / changer de navigateur efface le `localStorage`. Pensez à **Exporter** pour garder une sauvegarde.
+- **Dépenses** et **Réservations** sont **statiques** : elles s'affichent directement depuis `data.js` (aucune saisie dans la page). Pour les mettre à jour, éditez `data.js`.
+- Seule la **checklist bagages** est interactive : les cases cochées sont enregistrées dans le `localStorage` du navigateur (par appareil).
+- Le **thème clair/sombre** choisi via le bouton ☾/☀ est aussi mémorisé en `localStorage`.
 
 ## Héberger en ligne (optionnel)
 
 Tout est en chemins relatifs → compatible hébergement statique. Pour AWS S3 :
 1. Créer un bucket, activer « Static website hosting ».
-2. Uploader tous les fichiers (en conservant le dossier `assets/`).
+2. Uploader tous les fichiers (en conservant le dossier `assets/`, dont `assets/fonts/`).
 3. (Optionnel) CloudFront + HTTPS devant le bucket.
-
-Le `localStorage` étant lié à l'origine (domaine), les données saisies en local et celles saisies sur le site hébergé sont distinctes — utilisez Export/Import pour transférer.
 
 ## Sources de l'itinéraire
 

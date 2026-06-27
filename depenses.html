@@ -9,18 +9,8 @@
 </head>
 <body data-page="depenses">
   <main>
-    <h1 class="page-title">💶 Dépenses</h1>
-    <p class="page-sub">Saisissez vos dépenses : tout est enregistré automatiquement dans ce navigateur. Total en euros.</p>
-
-    <div class="toolbar">
-      <button class="btn primary" id="dep-add">＋ Ajouter une dépense</button>
-      <span class="spacer"></span>
-      <button class="btn ghost" id="dep-export">⬇ Exporter (.json)</button>
-      <label class="btn ghost">⬆ Importer
-        <input type="file" id="dep-import" accept="application/json,.json" hidden>
-      </label>
-      <button class="btn ghost danger" id="dep-reset">↺ Réinitialiser</button>
-    </div>
+    <h1 class="page-title">Dépenses</h1>
+    <p class="page-sub">Estimation des coûts du voyage (vol, voiture, hébergements). Montants en euros.</p>
 
     <div class="card exp-chart" id="dep-chart"></div>
 
@@ -28,15 +18,16 @@
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th style="width:130px">Date</th><th style="width:150px">Catégorie</th><th>Libellé</th><th class="num" style="width:120px">Montant</th><th style="width:40px"></th></tr>
+            <tr><th style="width:110px">Date</th><th style="width:150px">Catégorie</th><th>Libellé</th><th class="num" style="width:120px">Montant</th></tr>
           </thead>
           <tbody id="dep-body"></tbody>
+          <tfoot>
+            <tr><td colspan="3">Total</td><td class="num" id="dep-total">—</td></tr>
+          </tfoot>
         </table>
       </div>
     </div>
-
-    <div class="totaux" id="dep-totaux"></div>
-    <p class="muted">💡 Astuce : « Exporter » télécharge une sauvegarde .json (utile avant de changer d'appareil ou par sécurité). « Importer » recharge un fichier exporté.</p>
+    <p class="muted">Les montants sont fixés dans <code>assets/data.js</code>. Pour les modifier, édite ce fichier.</p>
   </main>
   <script src="assets/data.js"></script>
   <script src="assets/app.js"></script>

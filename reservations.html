@@ -9,31 +9,28 @@
 </head>
 <body data-page="reservations">
   <main>
-    <h1 class="page-title">📋 Suivi des réservations</h1>
-    <p class="page-sub">Hôtels, excursions, vol, transport. Modifiez le statut au fur et à mesure — tout est enregistré.</p>
+    <h1 class="page-title">Réservations</h1>
+    <p class="page-sub">Hôtels, excursions, vol, transport — état des réservations du voyage.</p>
 
     <div class="toolbar">
-      <button class="btn primary" id="resa-add">＋ Ajouter une ligne</button>
       <span class="status resa" id="resa-count">…</span>
-      <span class="spacer"></span>
-      <button class="btn ghost" id="resa-export">⬇ Exporter</button>
-      <label class="btn ghost">⬆ Importer
-        <input type="file" id="resa-import" accept="application/json,.json" hidden>
-      </label>
-      <button class="btn ghost danger" id="resa-reset">↺ Réinitialiser</button>
+      <span class="muted">Statuts :</span>
+      <span class="status todo">à faire</span>
+      <span class="status resa">réservé</span>
+      <span class="status paye">payé</span>
     </div>
 
     <div class="card">
       <div class="table-wrap">
         <table>
           <thead>
-            <tr><th style="width:110px">Type</th><th>Libellé</th><th style="width:140px">Date</th><th style="width:130px">N° confirmation</th><th style="width:130px">Statut</th><th style="width:40px"></th></tr>
+            <tr><th style="width:110px">Type</th><th>Libellé</th><th style="width:120px">Date</th><th style="width:140px">N° confirmation</th><th style="width:110px">Statut</th></tr>
           </thead>
           <tbody id="resa-body"></tbody>
         </table>
       </div>
     </div>
-    <p class="muted">Statuts : <span class="status todo">à faire</span> <span class="status resa">réservé</span> <span class="status paye">payé</span></p>
+    <p class="muted">L'état est fixé dans <code>assets/data.js</code>. Préviens-moi quand tu réserves quelque chose, je mets à jour.</p>
   </main>
   <script src="assets/data.js"></script>
   <script src="assets/app.js"></script>
